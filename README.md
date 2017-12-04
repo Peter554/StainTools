@@ -2,11 +2,19 @@
 
 For usage see the notebook ```demo.ipynb```
 
+In short do something like
+
+```
+n=stainNorm_Reinhard.normalizer()
+n.fit(target_image)
+out=n.transform(source_image)
+```
+
 Implementation of a few common stain normalization techniques ([Reinhard](http://ieeexplore.ieee.org/document/946629/), [Macenko](http://ieeexplore.ieee.org/document/5193250/), [Vahadane](http://ieeexplore.ieee.org/document/7164042/)) in Python. 
 
 Here we show the application of the techniques to a few images (in data folder). We normalize to the first image and for Macenko and Vahadane also show the extracted Hematoxylin channel.
 
-Below that are a few more challenging images.
+Below that are a few more challenging images (also in data folder).
 
 One change to the vanilla methods is used. With all images we first apply a brightness standardizing step (below). This is especially useful in handling the more challenging images (which are typically too dim) and does not damage performance for the other images. 
 
