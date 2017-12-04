@@ -75,6 +75,7 @@ class normalizer(object):
         self.target_stds = stds
 
     def transform(self, I):
+        I = ut.standardize_brightness(I)
         I1, I2, I3 = lab_split(I)
         means, stds = get_mean_std(I)
         norm1 = ((I1 - means[0]) * (self.target_stds[0] / stds[0])) + self.target_means[0]
