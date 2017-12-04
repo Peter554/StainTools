@@ -28,3 +28,21 @@ For usage see the notebook *demo.ipynb*
 <a href="https://imgur.com/61dnNCE"><img src="https://i.imgur.com/61dnNCE.png" title="source: imgur.com" /></a>
 
 <a href="https://imgur.com/0FyOEVG"><img src="https://i.imgur.com/0FyOEVG.png" title="source: imgur.com" /></a>
+
+# More challenging images
+
+## Original images
+
+<a href="https://imgur.com/rovxJsL"><img src="https://i.imgur.com/rovxJsL.png" title="source: imgur.com" /></a>
+
+## Reinhard
+
+<a href="https://imgur.com/leVjKEt"><img src="https://i.imgur.com/leVjKEt.png" title="source: imgur.com" /></a>
+
+## Macenko
+
+<a href="https://imgur.com/vhTGR0R"><img src="https://i.imgur.com/vhTGR0R.png" title="source: imgur.com" /></a>
+
+## Vahadane
+
+<a href="https://imgur.com/0j9SWF8"><img src="https://i.imgur.com/0j9SWF8.png" title="source: imgur.com" /></a>
