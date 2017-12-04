@@ -118,7 +118,7 @@ def standardize_brightness(I):
     :param I:
     :return:
     """
-    p = np.percentile(I, 95)
+    p = np.percentile(I, 90)
     return np.clip(I * 255.0 / p, 0, 255).astype(np.uint8)
 
 
