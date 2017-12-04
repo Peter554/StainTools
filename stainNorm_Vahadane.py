@@ -15,7 +15,7 @@ import spams
 import utils as ut
 
 
-def get_stain_matrix(I, threshold=0.8, lamda=1):
+def get_stain_matrix(I, threshold=0.8, lamda=0.1):
     """
     Get 2x3 stain matrix. First row H and second row E
     :param I:
