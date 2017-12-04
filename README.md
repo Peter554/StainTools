@@ -5,9 +5,16 @@ For usage see the notebook ```demo.ipynb```
 In short do something like
 
 ```
-n=stainNorm_Reinhard.normalizer()
+n = stainNorm_Reinhard.normalizer()
 n.fit(target_image)
 out=n.transform(source_image)
+```
+
+If you want Hematoxylin do something like
+
+```
+n = stainNorm_Vahadane.normalizer()
+out = n.hematoxylin(source_image)
 ```
 
 Implementation of a few common stain normalization techniques ([Reinhard](http://ieeexplore.ieee.org/document/946629/), [Macenko](http://ieeexplore.ieee.org/document/5193250/), [Vahadane](http://ieeexplore.ieee.org/document/7164042/)) in Python. 
