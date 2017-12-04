@@ -38,6 +38,7 @@ def show_colors(C):
         plt.axis('off')
         plt.axis([0, 1, -1, n])
 
+
 def show(image, now=True, fig_size=(10, 10)):
     """
     Show an image (np.array).
@@ -56,7 +57,36 @@ def show(image, now=True, fig_size=(10, 10)):
     if now == True:
         plt.show()
 
-# def
+
+def patch_grid(ims, width=5, sub_sample=None, rand=False):
+    """
+    Display a grid of patches
+    :param ims:
+    :param width:
+    :param sub_sample:
+    :param rand:
+    :return:
+    """
+    N0 = np.shape(ims)[0]
+    if sub_sample == None:
+        N = N0
+        stack = ims
+    elif sub_sample != None and rand == False:
+        N = sub_sample
+        stack = ims[:N]
+    elif sub_sample != None and rand == True:
+        N = sub_sample
+        idx = np.random.choice(range(N), sub_sample, replace=False)
+        stack = ims[idx]
+    height = np.ceil(float(N) / width).astype(np.uint16)
+    plt.rcParams['figure.figsize'] = (18, (18 / width) * height)
+    plt.figure()
+    for i in range(N):
+        plt.subplot(height, width, i + 1)
+        im = stack[i]
+        show(im, now=False, fig_size=None)
+    plt.show()
+
 
 def remove_zeros(I):
     """
