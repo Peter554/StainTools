@@ -1,6 +1,25 @@
 # Stain normalization
 
-For usage see the notebook *demo.ipynb*
+For usage see the notebook ```demo.ipynb```
+
+Implementation of a few common stain normalization techniques ([Reinhard](http://ieeexplore.ieee.org/document/946629/), [Macenko](http://ieeexplore.ieee.org/document/5193250/), [Vahadane](http://ieeexplore.ieee.org/document/7164042/)) in Python. 
+
+This shows application of the techniques to a few images (in data folder). We normalize to the first image and for Macenko and Vahadane also show the extracted Hematoxylin channel.
+
+Below that are a few more challenging images.
+
+One change to the vanilla methods is used. With all images we first apply a brightness standardizing step (below). This is especially useful in handling the more challenging images (which are typically too dim) and does not damage performance for the other images. 
+
+```
+def standardize_brightness(I):
+    """
+
+    :param I:
+    :return:
+    """
+    p = np.percentile(I, 90)
+    return np.clip(I * 255.0 / p, 0, 255).astype(np.uint8)
+```
 
 ## Original images
 
