@@ -5,12 +5,14 @@ E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, ‘Color transfer between i
 """
 
 import cv2 as cv
-import numpy as np  # Normalise each channel based on statistics of source and target images
+import numpy as np
+
+### Some functions ###
 
 
 def lab_split(I):
     """
-
+    Convert from RGB uint8 to LAB and split into channels
     :param I: uint8
     :return:
     """
@@ -25,7 +27,7 @@ def lab_split(I):
 
 def merge_back(I1, I2, I3):
     """
-
+    Take seperate LAB channels and merge back to give RGB uint8
     :param I1:
     :param I2:
     :param I3:
@@ -40,7 +42,7 @@ def merge_back(I1, I2, I3):
 
 def get_mean_std(I):
     """
-
+    Get mean and standard deviation of each channel
     :param I: uint8
     :return:
     """
@@ -53,7 +55,7 @@ def get_mean_std(I):
     return means, stds
 
 
-###
+### Main class ###
 
 class normalizer(object):
     """
