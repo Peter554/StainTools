@@ -9,7 +9,7 @@ In short do something like
 ```
 n = stainNorm_Reinhard.normalizer()
 n.fit(target_image)
-out=n.transform(source_image)
+out = n.transform(source_image)
 ```
 
 If you want Hematoxylin do something like
