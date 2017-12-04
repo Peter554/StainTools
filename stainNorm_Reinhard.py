@@ -6,7 +6,7 @@ E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, ‘Color transfer between i
 
 import cv2 as cv
 import numpy as np
-import utils as ut
+import stain_utils as ut
 
 
 ### Some functions ###
