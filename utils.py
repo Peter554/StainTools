@@ -12,6 +12,8 @@ import spams
 import matplotlib.pyplot as plt
 
 
+##########################################
+
 def read_image(path):
     """
     Read an image to RGB uint8
@@ -58,7 +60,25 @@ def show(image, now=True, fig_size=(10, 10)):
         plt.show()
 
 
-def patch_grid(ims, width=5, sub_sample=None, rand=False):
+def build_stack(tup):
+    """
+    Build a stack of images from a tuple of images
+    :param tup:
+    :return:
+    """
+    N = len(tup)
+    if len(tup[0].shape) == 3:
+        h, w, c = tup[0].shape
+        stack = np.zeros((N, h, w, c))
+    if len(tup[0].shape) == 2:
+        h, w = tup[0].shape
+        stack = np.zeros((N, h, w))
+    for i in range(N):
+        stack[i] = tup[i]
+    return stack
+
+
+def patch_grid(ims, width=5, sub_sample=None, rand=False, save_name=None):
     """
     Display a grid of patches
     :param ims:
@@ -85,8 +105,12 @@ def patch_grid(ims, width=5, sub_sample=None, rand=False):
         plt.subplot(height, width, i + 1)
         im = stack[i]
         show(im, now=False, fig_size=None)
+    if save_name != None:
+        plt.savefig(save_name)
     plt.show()
 
+
+######################################
 
 def remove_zeros(I):
     """
