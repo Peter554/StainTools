@@ -10,8 +10,8 @@ http://spams-devel.gforge.inria.fr/index.html
 Use with python via e.g https://anaconda.org/conda-forge/python-spams
 """
 
-import numpy as np
 import spams
+import numpy as np
 import stain_utils as ut
 
 
