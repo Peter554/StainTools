@@ -1,5 +1,7 @@
 # Stain normalization
 
+For usage see the notebook *demo.ipynb*
+
 ## Original images
 
 <a href="https://imgur.com/6nCgins"><img src="https://i.imgur.com/6nCgins.png" title="source: imgur.com" /></a>
