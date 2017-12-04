@@ -112,6 +112,16 @@ def patch_grid(ims, width=5, sub_sample=None, rand=False, save_name=None):
 
 ######################################
 
+def standardize_brightness(I):
+    """
+
+    :param I:
+    :return:
+    """
+    p = np.percentile(I, 95)
+    return np.clip(I * 255.0 / p, 0, 255).astype(np.uint8)
+
+
 def remove_zeros(I):
     """
     Remove zeros, replace with 1's.

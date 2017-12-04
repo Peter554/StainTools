@@ -6,6 +6,8 @@ E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, ‘Color transfer between i
 
 import cv2 as cv
 import numpy as np
+import utils as ut
+
 
 ### Some functions ###
 
@@ -36,7 +38,7 @@ def merge_back(I1, I2, I3):
     I1 *= 2.55
     I2 += 128.0
     I3 += 128.0
-    I = np.clip(cv.merge((I1, I2, I3)),0,255).astype(np.uint8)
+    I = np.clip(cv.merge((I1, I2, I3)), 0, 255).astype(np.uint8)
     return cv.cvtColor(I, cv.COLOR_LAB2RGB)
 
 
@@ -67,6 +69,7 @@ class normalizer(object):
         self.target_stds = None
 
     def fit(self, target):
+        target = ut.standardize_brightness(target)
         means, stds = get_mean_std(target)
         self.target_means = means
         self.target_stds = stds

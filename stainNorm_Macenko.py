@@ -53,6 +53,7 @@ class normalizer(object):
         self.target_concentrations = None
 
     def fit(self, target):
+        target = ut.standardize_brightness(target)
         self.stain_matrix_target = get_stain_matrix(target)
         self.target_concentrations = ut.get_concentrations(target, self.stain_matrix_target)
 
@@ -60,6 +61,7 @@ class normalizer(object):
         return ut.OD_to_RGB(self.stain_matrix_target)
 
     def transform(self, I):
+        I = ut.standardize_brightness(I)
         stain_matrix_source = get_stain_matrix(I)
         source_concentrations = ut.get_concentrations(I, stain_matrix_source)
         maxC_source = np.percentile(source_concentrations, 99, axis=0).reshape((1, 2))
@@ -69,6 +71,7 @@ class normalizer(object):
             np.uint8)
 
     def hematoxylin(self, I):
+        I = ut.standardize_brightness(I)
         h, w, c = I.shape
         stain_matrix_source = get_stain_matrix(I)
         source_concentrations = ut.get_concentrations(I, stain_matrix_source)
