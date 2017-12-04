@@ -4,7 +4,7 @@ For usage see the notebook ```demo.ipynb```
 
 Implementation of a few common stain normalization techniques ([Reinhard](http://ieeexplore.ieee.org/document/946629/), [Macenko](http://ieeexplore.ieee.org/document/5193250/), [Vahadane](http://ieeexplore.ieee.org/document/7164042/)) in Python. 
 
-This shows application of the techniques to a few images (in data folder). We normalize to the first image and for Macenko and Vahadane also show the extracted Hematoxylin channel.
+Here we show the application of the techniques to a few images (in data folder). We normalize to the first image and for Macenko and Vahadane also show the extracted Hematoxylin channel.
 
 Below that are a few more challenging images.
 
