@@ -12,7 +12,7 @@ Use with python via e.g https://anaconda.org/conda-forge/python-spams
 
 import numpy as np
 import spams
-from utils import stainNorm_utils as ut
+import utils as ut
 
 
 def get_stain_matrix(I, threshold=0.8, lamda=1):

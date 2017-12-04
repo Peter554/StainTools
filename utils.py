@@ -56,6 +56,8 @@ def show(image, now=True, fig_size=(10, 10)):
     if now == True:
         plt.show()
 
+# def
+
 def remove_zeros(I):
     """
     Remove zeros, replace with 1's.

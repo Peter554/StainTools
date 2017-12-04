@@ -11,7 +11,7 @@ Use with python via e.g https://anaconda.org/conda-forge/python-spams
 """
 
 import numpy as np
-from utils import stainNorm_utils as ut
+import utils as ut
 
 
 def get_stain_matrix(I, beta=0.15, alpha=1):
