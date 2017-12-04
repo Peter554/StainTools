@@ -15,10 +15,10 @@
 
 *M. Macenko et al., ‘A method for normalizing histology slides for quantitative analysis’, in 2009 IEEE International Symposium on Biomedical Imaging: From Nano to Macro, 2009, pp. 1107–1110.*
 
+<a href="https://imgur.com/DEqYbGF"><img src="https://i.imgur.com/DEqYbGF.png" title="source: imgur.com" /></a>
 
 <a href="https://imgur.com/3YpwQso"><img src="https://i.imgur.com/3YpwQso.png" title="source: imgur.com" /></a>
 
-<a href="https://imgur.com/DEqYbGF"><img src="https://i.imgur.com/DEqYbGF.png" title="source: imgur.com" /></a>
 
 ## Vahadane
 
