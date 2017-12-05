@@ -1,4 +1,4 @@
-# Stain normalization.
+# Stain normalization
 
 
 	
