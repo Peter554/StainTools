@@ -19,7 +19,7 @@ n = stainNorm_Vahadane.normalizer()
 out = n.hematoxylin(source_image)
 ```
 
-We use the [spams](http://spams-devel.gforge.inria.fr/index.html) package. Use with Python via e.g https://anaconda.org/conda-forge/python-spams
+We use the [SPAMS](http://spams-devel.gforge.inria.fr/index.html) (SPArse Modeling Software) package. Use with Python via e.g https://anaconda.org/conda-forge/python-spams
 
 Here we show the application of the techniques to a few images (in data folder). We normalize to the first image and for Macenko and Vahadane also show the extracted Hematoxylin channel.
 
