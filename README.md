@@ -31,9 +31,8 @@ n.fit(target_image)
 stain_utils.show_colors(n.target_stains())
 ```
 
-<a href="https://imgur.com/dNvwcSE"><img src="https://i.imgur.com/dNvwcSE.png" title="source: imgur.com" /></a>
-
-<a href="https://imgur.com/eJSa9cj"><img src="https://i.imgur.com/eJSa9cj.png" title="source: imgur.com" /></a>
+<a href="https://imgur.com/dNvwcSE"><img src="https://i.imgur.com/dNvwcSEm.png" title="source: imgur.com" /></a>
+<a href="https://imgur.com/eJSa9cj"><img src="https://i.imgur.com/eJSa9cjm.png" title="source: imgur.com" /></a>
 
 
 We use the [SPAMS](http://spams-devel.gforge.inria.fr/index.html) (SPArse Modeling Software) package. Use with Python via e.g https://anaconda.org/conda-forge/python-spams
