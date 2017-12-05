@@ -1,16 +1,16 @@
 **Table of Contents**  
 
-- [Overview](#)
-- [Some simple examples](#)
-	- [Original images](#)
-	- [Reinhard](#)
-	- [Macenko](#)
-	- [Vahadane](#)
-- [More challenging images](#)
-	- [Original images](#)
-	- [Reinhard](#)
-	- [Macenko](#)
-	- [Vahadane](#)
+- Overview
+- Some simple examples
+	- Original images
+	- Reinhard
+	- Macenko
+	- Vahadane
+- More challenging images
+	- Original images
+	- Reinhard
+    - Macenko
+	- Vahadane
 
 	
 # Overview
