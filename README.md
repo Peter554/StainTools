@@ -8,7 +8,7 @@ Implementation of a few common stain normalization techniques ([Reinhard](http:/
 
 For usage see the notebook ```demo.ipynb```
 
-In short do something like
+In short do something like (all techniques have same API, where we create a stain normalization object or *normalizer*. The fit and transform methods are then the most important).
 
 ```
 n = stainNorm_Reinhard.normalizer()
