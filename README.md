@@ -1,4 +1,3 @@
-# Stain normalization
 
 
 	
@@ -8,7 +7,7 @@ Implementation of a few common stain normalization techniques ([Reinhard](http:/
 
 For usage see the notebook ```demo.ipynb```
 
-In short do something like (all techniques have same API, where we create a stain normalization object or *normalizer*. The fit and transform methods are then the most important).
+In short do something like (all techniques have the same API, where we create a stain normalization object or *normalizer*. The fit and transform methods are then the most important).
 
 ```
 n = stainNorm_Reinhard.normalizer()
@@ -36,7 +35,7 @@ stain_utils.show_colors(n.target_stains())
 
 We use the [SPAMS](http://spams-devel.gforge.inria.fr/index.html) (SPArse Modeling Software) package. Use with Python via e.g https://anaconda.org/conda-forge/python-spams
 
-Here we show the application of the techniques to a few images (in data folder). We normalize to the first image and for Macenko and Vahadane also show the extracted Hematoxylin channel. Below that are a few more challenging images (also in data folder). The images are taken from the [ICIAR 2018 challenge](https://iciar2018-challenge.grand-challenge.org/).
+Below we show the application of the techniques to a few images (in data folder). We normalize to the first image and for Macenko and Vahadane also show the extracted Hematoxylin channel. Below that are a few more challenging images (also in data folder). All images are taken from the [ICIAR 2018 challenge](https://iciar2018-challenge.grand-challenge.org/).
 
 One change to the vanilla methods is used. With all images we first apply a brightness standardizing step (below). This is especially useful in handling the more challenging images (which are typically too dim) and does not damage performance for the other images. 
 
