@@ -1,21 +1,10 @@
-**Table of Contents**  
-
 - Overview
 - Some simple examples
-	- Original images
-	- Reinhard
-	- Macenko
-	- Vahadane
 - More challenging images
-	- Original images
-	- Reinhard
-    - Macenko
-	- Vahadane
 
-	
 # Overview
 
-Implementation of a few common stain normalization techniques ([Reinhard](http://ieeexplore.ieee.org/document/946629/), [Macenko](http://ieeexplore.ieee.org/document/5193250/), [Vahadane](http://ieeexplore.ieee.org/document/7164042/)) in Python. 
+Implementation of a few common stain normalization techniques ([Reinhard](http://ieeexplore.ieee.org/document/946629/), [Macenko](http://ieeexplore.ieee.org/document/5193250/), [Vahadane](http://ieeexplore.ieee.org/document/7164042/)) in Python (3.5).
 
 For usage see the notebook ```demo.ipynb```
 
