@@ -10,6 +10,8 @@ http://spams-devel.gforge.inria.fr/index.html
 Use with python via e.g https://anaconda.org/conda-forge/python-spams
 """
 
+from __future__ import division
+
 import spams
 import numpy as np
 import stain_utils as ut
@@ -35,7 +37,7 @@ def get_stain_matrix(I, threshold=0.8, lamda=0.1):
 
 ###
 
-class normalizer(object):
+class Normalizer(object):
     """
     A stain normalization object
     """

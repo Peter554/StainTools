@@ -4,6 +4,8 @@ Normalize a patch stain to the target image using the method of:
 E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, ‘Color transfer between images’, IEEE Computer Graphics and Applications, vol. 21, no. 5, pp. 34–41, Sep. 2001.
 """
 
+from __future__ import division
+
 import cv2 as cv
 import numpy as np
 import stain_utils as ut
@@ -59,7 +61,7 @@ def get_mean_std(I):
 
 ### Main class ###
 
-class normalizer(object):
+class Normalizer(object):
     """
     A stain normalization object
     """
