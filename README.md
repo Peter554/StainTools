@@ -11,7 +11,7 @@ For usage see the notebook ```demo.ipynb```
 In short do something like (all techniques have the same API, where we create a stain normalization object or *Normalizer*. The fit and transform methods are then the most important).
 
 ```
-n = stainNorm_Reinhard.normalizer()
+n = stainNorm_Reinhard.Normalizer()
 n.fit(target_image)
 out = n.transform(source_image)
 ```
@@ -19,14 +19,14 @@ out = n.transform(source_image)
 If you want Hematoxylin do something like
 
 ```
-n = stainNorm_Vahadane.normalizer()
+n = stainNorm_Vahadane.Normalizer()
 out = n.hematoxylin(source_image)
 ```
 
 We can also view the stains seperated by e.g.
 
 ```
-n = stainNorm_Vahadane.normalizer()
+n = stainNorm_Vahadane.Normalizer()
 n.fit(target_image)
 stain_utils.show_colors(n.target_stains())
 ```
