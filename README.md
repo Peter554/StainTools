@@ -1,6 +1,6 @@
-- Overview
-- Some simple examples
-- More challenging images
+*To Do*
+
+stainNorm_Macenko.py and stainNorm_Vahadane.py share code. Maybe a parent class with inheritance would be more elegant.
 
 # Overview
 
@@ -43,7 +43,9 @@ One change to the vanilla methods is used. With all images we first apply a brig
 ```
 def standardize_brightness(I):
     """
-
+    An image is a numpy array of size HxWx3 (RGB) with integer values in the range 0-255 (uint8).
+    We standardize so 10% of the elements of this array take the value 255.
+    For already bright images this makes little change. For dark images this makes a significant difference,
     :param I:
     :return:
     """
