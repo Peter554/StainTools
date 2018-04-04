@@ -1,32 +1,28 @@
-*To Do*
-
-stainNorm_Macenko.py and stainNorm_Vahadane.py share code. Maybe a parent class with inheritance would be more elegant.
-
 # Overview
 
-Implementation of a few common stain normalization techniques ([Reinhard](http://ieeexplore.ieee.org/document/946629/), [Macenko](http://ieeexplore.ieee.org/document/5193250/), [Vahadane](http://ieeexplore.ieee.org/document/7164042/)) in Python (3.5).
+Implementation of a few common stain normalization techniques ([Reinhard](http://ieeexplore.ieee.org/document/946629/), [Macenko](http://ieeexplore.ieee.org/document/5193250/), [Vahadane](http://ieeexplore.ieee.org/document/7164042/)) in **Python (tested on 3.5)**. Please refer to the linked papers for details on the methods.
 
-For usage see the notebook ```demo.ipynb```
+For example usage see the notebook ```demo.ipynb```
 
 In short do something like (all techniques have the same API, where we create a stain normalization object or *Normalizer*. The fit and transform methods are then the most important).
 
 ```
-n = stainNorm_Reinhard.Normalizer()
+n = normalizers.ReinhardNormalizer()
 n.fit(target_image)
 out = n.transform(source_image)
 ```
 
-If you want Hematoxylin do something like
+If you want Hematoxylin do something like (Macenko or Vahadane methods only)
 
 ```
-n = stainNorm_Vahadane.Normalizer()
+n = normalizers.VahadaneNormalizer()
 out = n.hematoxylin(source_image)
 ```
 
-We can also view the stains seperated by e.g.
+We can also view the stains separated by e.g. (Macenko or Vahadane methods only)
 
 ```
-n = stainNorm_Vahadane.Normalizer()
+n = normalizers.VahadaneNormalizer()
 n.fit(target_image)
 stain_utils.show_colors(n.target_stains())
 ```
