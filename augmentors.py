@@ -7,6 +7,7 @@ from __future__ import division
 import numpy as np
 import normalizers
 from utils import misc_utils as mu
+from utils.rj_utils import RuifrokJohnstonDeconvolution as RJ_dec
 import copy
 
 
@@ -19,8 +20,9 @@ class Fetcher(object):
         """
         assert method in ['RJ', 'Macenko', 'Vahadane'], 'select appropriate method!'
         if method == 'RJ':
-            self.stain_fetcher = self.RJ_stain
-            self.concentration_fetcher = self.RJ_concentrations
+            deconvolution = RJ_dec
+            self.stain_fetcher = deconvolution.get_stain_matrix
+            self.concentration_fetcher = deconvolution.get_concentrations
         else:
             if method == 'Macenko':
                 normalizer = normalizers.MacenkoNormalizer
@@ -43,35 +45,6 @@ class Fetcher(object):
         else:
             source_concentrations = self.concentration_fetcher(I, stain_matrix)
             return stain_matrix, source_concentrations
-
-    @staticmethod
-    def RJ_stain(*args):
-        """
-        Get RJ stain matrix.
-        A. C. Ruifrok, D. A. Johnston et al., “Quantification of histochemical
-        staining by color deconvolution,” Analytical and quantitative cytology
-        and histology, vol. 23, no. 4, pp. 291–299, 2001.
-        :param args: a dummy
-        :return:
-        """
-        stain_matrix = np.array([[0.644211, 0.716556, 0.266844],
-                                 [0.092789, 0.954111, 0.283111],
-                                 [-0.0903, -0.2752, 0.9571]])
-        return stain_matrix
-
-    def RJ_concentrations(self, I, stain_matrix):
-        """
-        Performs stain concentration extraction according to
-        A. C. Ruifrok, D. A. Johnston et al., “Quantification of histochemical
-        staining by color deconvolution,” Analytical and quantitative cytology
-        and histology, vol. 23, no. 4, pp. 291–299, 2001.
-        :param I:
-        :return:
-        """
-        OD = mu.RGB_to_OD(I).reshape((-1, 3))
-        source_concentrations = np.dot(OD, np.linalg.inv(stain_matrix))
-        return source_concentrations
-
 
 class TellezAugmentor(object):
 
