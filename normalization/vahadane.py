@@ -33,6 +33,3 @@ class VahadaneNormalizer(FancyNormalizer):
             dictionary = dictionary[[1, 0], :]
         dictionary = mu.normalize_rows(dictionary)
         return dictionary
-
-if __name__ == '__main__':
-    VahadaneNormalizer()

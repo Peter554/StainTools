@@ -8,3 +8,7 @@ __pycache__/
 *.pdf
 
 results/
+
+test_all\.py
+
+\.cache/v/cache/

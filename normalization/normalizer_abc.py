@@ -71,6 +71,8 @@ class FancyNormalizer(Normaliser):
         I = mu.standardize_brightness(I)
         stain_matrix_source = self.get_stain_matrix(I)
         source_concentrations = self.get_concentrations(I, stain_matrix_source)
+        assert stain_matrix_source.min() >= 0
+        assert source_concentrations.min() >= 0
         return (255 * np.exp(-1 * np.dot(source_concentrations, self.stain_matrix_target).reshape(I.shape))).astype(
             np.uint8)
 
@@ -80,7 +82,7 @@ class FancyNormalizer(Normaliser):
         Must call fit first (this builds the stain matrix)
         :return:
         """
-        assert self.stain_matrix_target is not None, 'Run fit method first.'
+        assert self.stain_matrix_target is not None, 'Run fit method first'
         return mu.OD_to_RGB(self.stain_matrix_target)
 
     def hematoxylin(self, I):

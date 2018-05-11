@@ -48,6 +48,7 @@ class ReinhardNormalizer(Normaliser):
         :param I: uint8
         :return:
         """
+        assert mu.is_uint8_image(I)
         I = cv.cvtColor(I, cv.COLOR_RGB2LAB)
         I = I.astype(np.float32)
         I1, I2, I3 = cv.split(I)
