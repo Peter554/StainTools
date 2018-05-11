@@ -12,6 +12,13 @@ import numpy as np
 
 class Normaliser(ABC):
 
+    def __init__(self, **kwargs):
+        self.standardize = kwargs['standardize'] if 'standardize' in kwargs.keys() else True
+        if self.standardize:
+            print('Using brightness standardization')
+        else:
+            print('Not standardizing brightness')
+
     @abstractmethod
     def fit(self, target):
         """Fit the normalizer to an target image"""
@@ -23,7 +30,8 @@ class Normaliser(ABC):
 
 class FancyNormalizer(Normaliser):
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.stain_matrix_target = None
 
     @abstractmethod
@@ -59,7 +67,8 @@ class FancyNormalizer(Normaliser):
         :param target:
         :return:
         """
-        target = mu.standardize_brightness(target)
+        if self.standardize:
+            target = mu.standardize_brightness(target)
         self.stain_matrix_target = self.get_stain_matrix(target)
 
     def transform(self, I):
@@ -68,7 +77,8 @@ class FancyNormalizer(Normaliser):
         :param I:
         :return:
         """
-        I = mu.standardize_brightness(I)
+        if self.standardize:
+            I = mu.standardize_brightness(I)
         stain_matrix_source = self.get_stain_matrix(I)
         source_concentrations = self.get_concentrations(I, stain_matrix_source)
         assert stain_matrix_source.min() >= 0
@@ -91,7 +101,8 @@ class FancyNormalizer(Normaliser):
         :param I:
         :return:
         """
-        I = mu.standardize_brightness(I)
+        if self.standardize:
+            I = mu.standardize_brightness(I)
         h, w, c = I.shape
         stain_matrix_source = self.get_stain_matrix(I)
         source_concentrations = self.get_concentrations(I, stain_matrix_source)

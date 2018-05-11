@@ -12,7 +12,8 @@ class ReinhardNormalizer(Normaliser):
     E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, ‘Color transfer between images’, IEEE Computer Graphics and Applications, vol. 21, no. 5, pp. 34–41, Sep. 2001.
     """
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.target_means = None
         self.target_stds = None
 
@@ -22,7 +23,8 @@ class ReinhardNormalizer(Normaliser):
         :param target:
         :return:
         """
-        target = mu.standardize_brightness(target)
+        if self.standardize:
+            target = mu.standardize_brightness(target)
         means, stds = self.get_mean_std(target)
         self.target_means = means
         self.target_stds = stds
@@ -33,7 +35,8 @@ class ReinhardNormalizer(Normaliser):
         :param I:
         :return:
         """
-        I = mu.standardize_brightness(I)
+        if self.standardize:
+            I = mu.standardize_brightness(I)
         I1, I2, I3 = self.lab_split(I)
         means, stds = self.get_mean_std(I)
         norm1 = ((I1 - means[0]) * (self.target_stds[0] / stds[0])) + self.target_means[0]

@@ -11,8 +11,8 @@ class MacenkoNormalizer(FancyNormalizer):
     M. Macenko et al., ‘A method for normalizing histology slides for quantitative analysis’, in 2009 IEEE International Symposium on Biomedical Imaging: From Nano to Macro, 2009, pp. 1107–1110.
     """
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.target_concentrations = None
 
     def fit(self, target):
@@ -21,7 +21,9 @@ class MacenkoNormalizer(FancyNormalizer):
         :param target:
         :return:
         """
-        super().fit(target)
+        if self.standardize:
+            target = mu.standardize_brightness(target)
+        self.stain_matrix_target = self.get_stain_matrix(target)
         self.target_concentrations = self.get_concentrations(target, self.stain_matrix_target)
 
     def transform(self, I):
@@ -30,7 +32,8 @@ class MacenkoNormalizer(FancyNormalizer):
         :param I:
         :return:
         """
-        I = mu.standardize_brightness(I)
+        if self.standardize:
+            I = mu.standardize_brightness(I)
         stain_matrix_source = self.get_stain_matrix(I)
         source_concentrations = self.get_concentrations(I, stain_matrix_source)
         maxC_source = np.percentile(source_concentrations, 99, axis=0).reshape((1, 2))
