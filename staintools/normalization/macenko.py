@@ -1,7 +1,7 @@
 from __future__ import division
 
 from .normalizer_abc import FancyNormalizer
-from ..utils import misc_utils as mu
+from ..utils import misc as mu
 import numpy as np
 
 

@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='staintools',
-    version='0.0.2',
+    version='0.0.1',
     description='A package for stain normalization, augmentation and more.',
     long_description=readme,
     author='Peter Byfield',
@@ -15,6 +15,13 @@ setup(
     install_requires=['numpy',
                       'opencv-python',
                       'matplotlib',
-                      'jupyter'
-                      ]
+                      'jupyter',
+                      'future',
+                      'cython'
+                      ],
+    classifiers=[
+        # Specify the Python versions you support here. In particular, ensure
+        # that you indicate whether you support Python 2, Python 3 or both.
+        'Programming Language :: Python :: 3.5'
+    ]
 )

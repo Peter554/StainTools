@@ -9,7 +9,7 @@ import cv2 as cv
 import os
 import matplotlib.pyplot as plt
 
-from . import misc_utils as mu
+from . import misc as mu
 
 
 ###

@@ -4,7 +4,7 @@ RJ stain deconvolution methods
 
 from __future__ import division
 
-from . import misc_utils as mu
+from . import misc as mu
 import numpy as np
 
 class RuifrokJohnstonDeconvolution(object):

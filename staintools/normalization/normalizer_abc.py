@@ -5,7 +5,7 @@ Normalizer abstract base classes
 from __future__ import division
 
 from abc import ABC, abstractmethod
-from ..utils import misc_utils as mu
+from ..utils import misc as mu
 import spams
 import numpy as np
 
