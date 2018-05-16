@@ -1,6 +1,6 @@
 from setuptools import setup
 
-with open('README.txt') as f:
+with open('README.md') as f:
     readme = f.read()
 
 setup(
@@ -11,5 +11,10 @@ setup(
     author='Peter Byfield',
     author_email='byfield554@gmail.com',
     url='https://github.com/Peter554/StainTools',
-    packages=['staintools']
+    packages=['staintools'],
+    install_requires=['numpy',
+                      'opencv-python',
+                      'matplotlib',
+                      'jupyter'
+                      ]
 )

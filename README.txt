@@ -1,2 +1,0 @@
-Please see readme.ipynb
-https://github.com/Peter554/StainTools/blob/master/README.ipynb
