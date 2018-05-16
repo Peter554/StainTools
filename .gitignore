@@ -12,3 +12,7 @@ results/
 test_all\.py
 
 \.cache/v/cache/
+
+dist/
+
+staintools\.egg-info/

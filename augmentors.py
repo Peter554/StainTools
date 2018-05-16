@@ -5,10 +5,9 @@ Stain augmentation objects
 from __future__ import division
 
 import numpy as np
-from utils import misc_utils as mu
-from utils.rj_utils import RuifrokJohnstonDeconvolution
-from normalization.macenko import MacenkoNormalizer
-from normalization.vahadane import VahadaneNormalizer
+from staintools.utils.rj_utils import RuifrokJohnstonDeconvolution
+from staintools.normalization.macenko import MacenkoNormalizer
+from staintools.normalization.vahadane import VahadaneNormalizer
 import copy
 
 
@@ -108,7 +107,7 @@ class TellezAugmentor(object):
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
-    from utils import visual_utils as vu
+    from staintools.utils import visual_utils as vu, misc_utils as mu
 
     I = vu.read_image('data/i1.png')
 
