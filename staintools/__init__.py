@@ -1,3 +1,7 @@
+from . import normalization
+from . import utils
+
+# For convenience
 from .normalization.reinhard import ReinhardNormalizer
 from .normalization.macenko import MacenkoNormalizer
 from .normalization.vahadane import VahadaneNormalizer
