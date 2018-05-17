@@ -124,3 +124,4 @@ def patch_grid(ims, width=5, sub_sample=False, rand=False, save_name=None):
         os.makedirs(os.path.dirname(save_name), exist_ok=True)
         plt.savefig(save_name)
     plt.show()
+

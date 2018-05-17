@@ -18,3 +18,5 @@ dist/
 staintools\.egg-info/
 
 apidoc/
+
+\.pytest_cache/v/cache/
