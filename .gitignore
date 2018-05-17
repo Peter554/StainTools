@@ -16,3 +16,5 @@ test_all\.py
 dist/
 
 staintools\.egg-info/
+
+apidoc/
