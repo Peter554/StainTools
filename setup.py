@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='staintools',
-    version='0.0.5',
+    version='0.0.6',
     description='A package for stain normalization, augmentation and more.',
     long_description=readme,
     author='Peter Byfield',
