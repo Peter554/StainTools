@@ -1,0 +1,14 @@
+name: py35
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.5
+  - numpy
+  - matplotlib
+  - pytest
+  - jupyter
+  - future
+  - cython
+  - python-spams
+  - opencv
