@@ -5,10 +5,6 @@ Tools for stain normalization and augmentation in Python (tested on 3.5). GitHub
 
 Latest build:
 
-.. image:: https://readthedocs.org/projects/staintools/badge/?version=latest
-    :target: http://staintools.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
-
 .. image:: https://travis-ci.org/Peter554/StainTools.svg?branch=master
     :target: https://travis-ci.org/Peter554/StainTools
 
@@ -25,7 +21,3 @@ Example usage
 
 Please see demo.ipynb `here <https://github.com/Peter554/StainTools/blob/master/demo.ipynb>`__.
 
-Docs
-=====
-
-Made with Sphinx and Read the Docs `here <http://staintools.readthedocs.io/en/stable/>`__.
