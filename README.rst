@@ -1,7 +1,7 @@
 StainTools
-===========
+==========
 
-Tools for stain normalization and augmentation in Python (tested on 3.5). GitHub repository `here <https://github.com/Peter554/StainTools>`__.
+Tools for tissue image stain normalization and augmentation in Python (tested on 3.5).
 
 Latest build:
 

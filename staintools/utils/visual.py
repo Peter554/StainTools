@@ -9,7 +9,7 @@ import cv2 as cv
 import os
 import matplotlib.pyplot as plt
 
-from . import misc as mu
+from staintools.utils.misc import check_image_and_squeeze_if_gray
 
 
 ###
@@ -22,44 +22,45 @@ def read_image(path):
     :param path: The path to the image.
     :return: RGB uint8 image.
     """
-    assert os.path.isfile(path), 'File not found'
+    assert os.path.isfile(path), "File not found"
     im = cv.imread(path)
+    # Convert from cv2 standard of BGR to our convention of RGB.
     im = cv.cvtColor(im, cv.COLOR_BGR2RGB)
     return im
 
 
-def show_colors(C):
+def plot_row_colors(C):
     """
-    Visualize rows of C as colors (RGB)
+    Plot rows of C as colors (RGB)
 
     :param C: An array N x 3 where the rows are considered as RGB colors.
     :return:
     """
-    assert isinstance(C, np.ndarray)
-    assert C.ndim == 2
-    assert C.shape[1] == 3
-    n = C.shape[0]
-    range255 = C.max() > 1.0
-    for i in range(n):
+    assert isinstance(C, np.ndarray), "C must be a numpy array."
+    assert C.ndim == 2, "C must be 2D."
+    assert C.shape[1] == 3, "C must have 3 columns."
+    N = C.shape[0]
+    range255 = C.max() > 1.0  # quick check to see if we have an image in range [0,1] or [0,255].
+    for i in range(N):
         if range255:
-            plt.plot([0, 1], [n - 1 - i, n - 1 - i], c=C[i] / 255, linewidth=20)
+            plt.plot([0, 1], [N - 1 - i, N - 1 - i], c=C[i] / 255, linewidth=20)
         else:
-            plt.plot([0, 1], [n - 1 - i, n - 1 - i], c=C[i], linewidth=20)
-        plt.axis('off')
-        plt.axis([0, 1, -1, n])
+            plt.plot([0, 1], [N - 1 - i, N - 1 - i], c=C[i], linewidth=20)
+    plt.axis("off")
+    plt.axis([0, 1, -1, N])
 
 
-def show(image, now=True, fig_size=(10, 10)):
+def plot_image(image, now=True, fig_size=(10, 10)):
     """
-    Show an image (np.array).
-    Caution! Rescales image to be in range [0,1].
+    Plot an image (np.array).
+    Caution: Rescales image to be in range [0,1].
 
     :param image:
     :param now: plt.show() now?
     :param fig_size: Figure size.
     :return:
     """
-    image = mu.check_image(image)
+    image = check_image_and_squeeze_if_gray(image)
     is_gray = True if image.ndim == 2 else False
     image = image.astype(np.float32)
     m, M = image.min(), image.max()
@@ -69,12 +70,12 @@ def show(image, now=True, fig_size=(10, 10)):
         plt.imshow((image - m) / (M - m), cmap='gray')
     else:
         plt.imshow((image - m) / (M - m))
-    plt.axis('off')
-    if now == True:
+    plt.axis("off")
+    if now:
         plt.show()
 
 
-def build_stack(images):
+def build_image_stack(images):
     """
     Build a stack of images from a tuple/list of images.
 
@@ -82,9 +83,9 @@ def build_stack(images):
     :return:
     """
     N = len(images)
-    images = [mu.check_image(image) for image in images]
+    images = [check_image_and_squeeze_if_gray(image) for image in images]
     for image in images:
-        assert image.ndim == images[0].ndim
+        assert image.ndim == images[0].ndim  # check all images have same number of dimensions.
     is_gray = True if images[0].ndim == 2 else False
     if is_gray:
         h, w = images[0].shape
@@ -97,7 +98,7 @@ def build_stack(images):
     return stack
 
 
-def patch_grid(ims, width=5, sub_sample=False, rand=False, save_name=None):
+def make_image_grid(ims, width=5, sub_sample=False, rand=False, save_name=None):
     """
     Display a grid of patches.
 
@@ -107,7 +108,7 @@ def patch_grid(ims, width=5, sub_sample=False, rand=False, save_name=None):
     :param rand: Randomize subsample?
     :return:
     """
-    N0 = np.shape(ims)[0]
+    N_all = np.shape(ims)[0]
     if sub_sample and rand:
         N = sub_sample
         idx = np.random.choice(range(N), sub_sample, replace=False)
@@ -116,16 +117,15 @@ def patch_grid(ims, width=5, sub_sample=False, rand=False, save_name=None):
         N = sub_sample
         stack = ims[:N]
     else:
-        N = N0
+        N = N_all
         stack = ims
-    height = np.ceil(float(N) / width).astype(np.uint16)
+    height = np.ceil(float(N) / width).astype(int)
     plt.rcParams['figure.figsize'] = (18, (18 / width) * height)
     plt.figure()
     for i in range(N):
         plt.subplot(height, width, i + 1)
-        show(stack[i], now=False, fig_size=None)
-    if save_name != None:
+        plot_image(stack[i], now=False, fig_size=None)
+    if save_name is not None:
         os.makedirs(os.path.dirname(save_name), exist_ok=True)
         plt.savefig(save_name)
     plt.show()
-

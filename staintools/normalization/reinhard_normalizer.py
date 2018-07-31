@@ -1,9 +1,10 @@
 from __future__ import division
 
-from .normalizer_abc import Normaliser
-from ..utils import misc as mu
 import numpy as np
 import cv2 as cv
+
+from staintools.normalization.normalizer_abc import Normaliser
+from staintools.utils.misc import is_uint8_image
 
 
 class ReinhardNormalizer(Normaliser):
@@ -12,8 +13,8 @@ class ReinhardNormalizer(Normaliser):
     E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, ‘Color transfer between images’, IEEE Computer Graphics and Applications, vol. 21, no. 5, pp. 34–41, Sep. 2001.
     """
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self):
+        super().__init__()
         self.target_means = None
         self.target_stds = None
 
@@ -24,8 +25,6 @@ class ReinhardNormalizer(Normaliser):
         :param target: Image RGB uint8.
         :return:
         """
-        if self.standardize:
-            target = mu.standardize_brightness(target)
         means, stds = self.get_mean_std(target)
         self.target_means = means
         self.target_stds = stds
@@ -37,8 +36,6 @@ class ReinhardNormalizer(Normaliser):
         :param I: Image RGB uint8.
         :return:
         """
-        if self.standardize:
-            I = mu.standardize_brightness(I)
         I1, I2, I3 = self.lab_split(I)
         means, stds = self.get_mean_std(I)
         norm1 = ((I1 - means[0]) * (self.target_stds[0] / stds[0])) + self.target_means[0]
@@ -54,13 +51,13 @@ class ReinhardNormalizer(Normaliser):
         :param I: Image RGB uint8.
         :return:
         """
-        assert mu.is_uint8_image(I)
+        assert is_uint8_image(I), "Should be a RGB uint8 image"
         I = cv.cvtColor(I, cv.COLOR_RGB2LAB)
-        I = I.astype(np.float32)
-        I1, I2, I3 = cv.split(I)
-        I1 /= 2.55
-        I2 -= 128.0
-        I3 -= 128.0
+        I_float = I.astype(np.float32)
+        I1, I2, I3 = cv.split(I_float)
+        I1 /= 2.55  # should now be in range [0,100]
+        I2 -= 128.0  # should now be in range [-127,127]
+        I3 -= 128.0  # should now be in range [-127,127]
         return I1, I2, I3
 
     @staticmethod
@@ -73,9 +70,9 @@ class ReinhardNormalizer(Normaliser):
         :param I3: B
         :return: Image RGB uint8.
         """
-        I1 *= 2.55
-        I2 += 128.0
-        I3 += 128.0
+        I1 *= 2.55  # should now be in range [0,255]
+        I2 += 128.0  # should now be in range [0,255]
+        I3 += 128.0  # should now be in range [0,255]
         I = np.clip(cv.merge((I1, I2, I3)), 0, 255).astype(np.uint8)
         return cv.cvtColor(I, cv.COLOR_LAB2RGB)
 
@@ -86,6 +83,7 @@ class ReinhardNormalizer(Normaliser):
         :param I: Image RGB uint8.
         :return:
         """
+        assert is_uint8_image(I), "Should be a RGB uint8 image"
         I1, I2, I3 = self.lab_split(I)
         m1, sd1 = cv.meanStdDev(I1)
         m2, sd2 = cv.meanStdDev(I2)

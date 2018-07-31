@@ -6,8 +6,8 @@ from __future__ import division
 
 import numpy as np
 from staintools.utils.rj import RuifrokJohnstonDeconvolution
-from staintools.normalization.macenko import MacenkoNormalizer
-from staintools.normalization.vahadane import VahadaneNormalizer
+from staintools.normalization.macenko_normalizer import MacenkoNormalizer
+from staintools.normalization.vahadane_normalizer import VahadaneNormalizer
 import copy
 
 
@@ -72,7 +72,7 @@ class TellezAugmentor(object):
         if standardize_brightness:
             I = mu.standardize_brightness(I)
         self.Ishape = I.shape
-        self.not_white = mu.notwhite_mask(I).reshape(-1)
+        self.not_white = mu.get_nonwhite_mask(I).reshape(-1)
         self.stain_matrix, self.source_concentrations = self.fetcher.compute(I)
 
     def augment(self, new_stain_mat=False, include_background=False):
@@ -119,7 +119,7 @@ if __name__ == '__main__':
     stack = np.zeros([10, h, w, c])
     for i in range(10):
         stack[i] = augmentor.augment(new_stain_mat=False)
-    vu.patch_grid(stack, width=5)
+    vu.make_image_grid(stack, width=5)
 
     # Test 1
     for method in ['Macenko', 'Vahadane']:
