@@ -43,6 +43,6 @@ class RuifrokJohnstonDeconvolution(object):
         :param I:
         :return:
         """
-        OD = mu.RGB_to_OD(I).reshape((-1, 3))
+        OD = mu.convert_RGB_to_OD(I).reshape((-1, 3))
         source_concentrations = np.dot(OD, np.linalg.inv(stain_matrix))
         return source_concentrations
