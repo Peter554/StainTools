@@ -9,7 +9,7 @@ import cv2 as cv
 import os
 import matplotlib.pyplot as plt
 
-from staintools.utils.misc import check_image_and_squeeze_if_gray
+from staintools.utils.misc_utils import check_image_and_squeeze_if_gray
 
 
 ###

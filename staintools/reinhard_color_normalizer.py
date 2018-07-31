@@ -3,8 +3,8 @@ from __future__ import division
 import numpy as np
 import cv2 as cv
 
-from staintools.normalization.normalizer_abc import Normaliser
-from staintools.utils.misc import is_uint8_image
+from staintools.stain_normalizer import Normaliser
+from staintools.utils.misc_utils import is_uint8_image
 
 
 class ReinhardNormalizer(Normaliser):

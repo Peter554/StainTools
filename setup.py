@@ -6,7 +6,7 @@ with open('README.rst') as f:
 setup(
     name='staintools',
     version='0.1.1',
-    description='A package for stain normalization, augmentation and more.',
+    description='A package for stain stain_normalization, augmentation and more.',
     long_description=readme,
     author='Peter Byfield',
     author_email='byfield554@gmail.com',

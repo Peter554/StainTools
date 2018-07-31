@@ -1,4 +1,4 @@
-from staintools.utils.misc import *
+from staintools.utils.misc_utils import *
 import numpy as np
 
 
