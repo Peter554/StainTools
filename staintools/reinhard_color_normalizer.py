@@ -10,7 +10,7 @@ class ReinhardColorNormalizer(object):
     """
     Normalize a patch color to the target image using the method of:
     E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley,
-    ‘Color transfer between images’, IEEE Computer Graphics and Applications, vol. 21, no. 5, pp. 34–41, Sep. 2001.
+    ‘Color transfer between images’
     """
 
     def __init__(self):

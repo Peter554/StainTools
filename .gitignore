@@ -15,3 +15,5 @@ dist
 .pytest_cache
 
 _build
+
+staintools\.egg-info/
