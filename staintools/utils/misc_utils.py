@@ -56,15 +56,13 @@ def normalize_rows(A):
     return A / np.linalg.norm(A, axis=1)[:, None]
 
 
-def get_nonwhite_mask(I, threshold=0.8):
+def get_luminosity_mask(I, threshold=0.8):
     """
-    Get a binary mask where true denotes non-white.
-    Specifically, a pixel is non-white if its luminance (in LAB color space) is less than the specified threshold.
-    In the context of digital pathology images the non-white mask is meant to approximately isolate the pixels belonging to tissue from those of the background.
+    Get a binary mask where true denotes pixels with a luminosity less than the specified threshold.
 
     :param I: RGB uint 8 image.
     :param threshold: Luminosity threshold.
-    :return: Binary mask where true denotes 'not white'.
+    :return: Binary mask.
     """
     assert is_uint8_image(I), "Image should be RGB uint8."
     I_LAB = cv.cvtColor(I, cv.COLOR_RGB2LAB)
