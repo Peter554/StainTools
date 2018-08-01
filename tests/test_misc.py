@@ -20,5 +20,3 @@ def test_is_uint8_image():
     assert is_uint8_image(x)
     x = x / 255
     assert not is_uint8_image(x)
-
-

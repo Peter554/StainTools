@@ -3,18 +3,17 @@ from __future__ import division
 import numpy as np
 import cv2 as cv
 
-from staintools.stain_normalizer import Normaliser
 from staintools.utils.misc_utils import is_uint8_image
 
 
-class ReinhardNormalizer(Normaliser):
+class ReinhardColorNormalizer(object):
     """
-    Normalize a patch stain to the target image using the method of:
-    E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, ‘Color transfer between images’, IEEE Computer Graphics and Applications, vol. 21, no. 5, pp. 34–41, Sep. 2001.
+    Normalize a patch color to the target image using the method of:
+    E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley,
+    ‘Color transfer between images’, IEEE Computer Graphics and Applications, vol. 21, no. 5, pp. 34–41, Sep. 2001.
     """
 
     def __init__(self):
-        super().__init__()
         self.target_means = None
         self.target_stds = None
 

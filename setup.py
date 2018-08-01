@@ -5,13 +5,13 @@ with open('README.rst') as f:
 
 setup(
     name='staintools',
-    version='0.1.1',
-    description='A package for stain stain_normalization, augmentation and more.',
+    version='0.9.9',
+    description='A package for tissue image stain normalization, augmentation and more.',
     long_description=readme,
     author='Peter Byfield',
     author_email='byfield554@gmail.com',
     url='https://github.com/Peter554/StainTools',
-    packages=find_packages(exclude=('tests', 'docs')),
+    packages=find_packages(exclude=('tests')),
     install_requires=['numpy',
                       'opencv-python',
                       'matplotlib',

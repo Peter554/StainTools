@@ -11,8 +11,9 @@ class MacenkoStainExtractor(StainExtractor):
     @staticmethod
     def get_stain_matrix(I, luminosity_threshold=0.8, angular_percentile=99):
         """
-        Get the stain matrix (2x3). First row H and second row E.
-        See the original paper for details.
+        Stain matrix estimation via method of:
+        M. Macenko et al.,
+        “A method for normalizing histology slides for quantitative analysis,”
 
         :param I: Image RGB uint8.
         :param luminosity_threshold:
@@ -20,9 +21,9 @@ class MacenkoStainExtractor(StainExtractor):
         :return:
         """
         # convert to OD and ignore background
-        mask = get_luminosity_mask(I, threshold=luminosity_threshold).reshape((-1,))
+        tissue_mask = get_luminosity_mask(I, threshold=luminosity_threshold).reshape((-1,))
         OD = convert_RGB_to_OD(I).reshape((-1, 3))
-        OD = OD[mask]
+        OD = OD[tissue_mask]
 
         # eigenvectors of cov in OD space (orthogonal as cov symmetric)
         _, V = np.linalg.eigh(np.cov(OD, rowvar=False))
