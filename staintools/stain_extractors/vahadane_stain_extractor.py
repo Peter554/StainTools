@@ -3,7 +3,7 @@ from __future__ import division
 import spams
 
 from staintools.stain_extractors.abc_stain_extractor import StainExtractor
-from staintools.utils.misc_utils import convert_RGB_to_OD, normalize_rows, get_nonwhite_mask
+from staintools.utils.misc_utils import convert_RGB_to_OD, normalize_rows, get_luminosity_mask
 
 
 class VahadaneStainExtractor(StainExtractor):
@@ -21,7 +21,7 @@ class VahadaneStainExtractor(StainExtractor):
         :return:
         """
         # convert to OD and ignore background
-        mask = get_nonwhite_mask(I, threshold=luminosity_threshold).reshape((-1,))
+        mask = get_luminosity_mask(I, threshold=luminosity_threshold).reshape((-1,))
         OD = convert_RGB_to_OD(I).reshape((-1, 3))
         OD = OD[mask]
 
