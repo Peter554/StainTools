@@ -15,9 +15,7 @@ setup(
     install_requires=['numpy',
                       'opencv-python',
                       'matplotlib',
-                      'jupyter',
                       'future',
-                      'cython'
                       ],
     classifiers=[
         # Specify the Python versions you support here. In particular, ensure
