@@ -13,7 +13,7 @@ class MacenkoStainExtractor(StainExtractor):
         """
         Stain matrix estimation via method of:
         M. Macenko et al.,
-        “A method for normalizing histology slides for quantitative analysis,”
+        'A method for normalizing histology slides for quantitative analysis'
 
         :param I: Image RGB uint8.
         :param luminosity_threshold:

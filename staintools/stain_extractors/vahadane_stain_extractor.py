@@ -13,7 +13,7 @@ class VahadaneStainExtractor(StainExtractor):
         """
         Stain matrix estimation via method of:
         A. Vahadane et al.,
-        “Structure-Preserving Color Normalization and Sparse Stain Separation for Histological Images,”
+        'Structure-Preserving Color Normalization and Sparse Stain Separation for Histological Images'
 
         :param I: Image RGB uint8.
         :param luminosity_threshold:
