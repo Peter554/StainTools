@@ -11,9 +11,9 @@ Tools for tissue image stain normalization and augmentation in Python (tested on
 Install
 ========
 
-``pip install staintools``
+``pip install staintools`` + install SPAMS (see below)
 
-**NOTE:** StainTools requires the SPAMS (SPArse Modeling Software) package. Please find out about this `here <http://spams-devel.gforge.inria.fr>`__. This may be installed via conda. For example, see `here <https://github.com/conda-forge/python-spams-feedstock>`__. Alternatively, a version under development is currently available from the PyPI testing site - run ``pip install --index-url https://test.pypi.org/simple/ spams``. Hopefully, SPAMS will soon be available on the main PyPI.
+StainTools requires the SPAMS (SPArse Modeling Software) package. Please find out about this `here <http://spams-devel.gforge.inria.fr>`__. This may be installed via conda. For example, see `here <https://github.com/conda-forge/python-spams-feedstock>`__. Alternatively, a version is currently available from the PyPI testing site - run ``pip install --index-url https://test.pypi.org/simple/ spams``. Hopefully, SPAMS will soon be available on the main PyPI.
 
 Docs
 ====
