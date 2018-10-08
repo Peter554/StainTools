@@ -1,10 +1,14 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import division
 
-from abc import ABC, abstractmethod
+from abc import ABCMeta, abstractmethod
 import numpy as np
 import spams
 
 from staintools.utils.misc_utils import convert_RGB_to_OD
+
+ABC = ABCMeta('ABC', (object,), {'__slots__': ()})
 
 
 class StainExtractor(ABC):

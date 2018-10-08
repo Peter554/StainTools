@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from setuptools import setup, find_packages
 
 with open('README.rst') as f:
@@ -15,9 +17,7 @@ setup(
     install_requires=['numpy',
                       'opencv-python',
                       'matplotlib',
-                      'jupyter',
                       'future',
-                      'cython'
                       ],
     classifiers=[
         # Specify the Python versions you support here. In particular, ensure

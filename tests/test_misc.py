@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from staintools.utils.misc_utils import *
 import numpy as np
 

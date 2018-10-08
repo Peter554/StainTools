@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from .stain_extractors.macenko_stain_extractor import MacenkoStainExtractor
 from .stain_extractors.vahadane_stain_extractor import VahadaneStainExtractor
 
