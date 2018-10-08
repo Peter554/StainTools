@@ -13,7 +13,7 @@ Install
 
 ``pip install staintools``
 
-**NOTE:** StainTools requires the SPAMS (SPArse Modeling Software) package. Please find out about this `here <http://spams-devel.gforge.inria.fr>`__. This may be installed via conda. For example, see `here <https://github.com/conda-forge/python-spams-feedstock>`__.
+**NOTE:** StainTools requires the SPAMS (SPArse Modeling Software) package. Please find out about this `here <http://spams-devel.gforge.inria.fr>`__. This may be installed via conda. For example, see `here <https://github.com/conda-forge/python-spams-feedstock>`__. Alternatively, a version under development is currently available from the PyPI testing site - run ``pip install --index-url https://test.pypi.org/simple/ spams``. Hopefully, SPAMS will soon be available on the main PyPI.
 
 Docs
 ====
@@ -51,7 +51,7 @@ Once we have the stain and concentration matrices we are able to easily carry ou
 
 - **Stain Normalization**. This basically involves casting one image in the stain colors of a target image. For this we basically decompose the images into the stain matrix S and the concentration matrix C, then replace the stain matrix of the image to be transformed with that of the target image. We then recombine to give the final stain normalized image. This is implemented in the class :code:`StainNormalizer`. See the demo notebook `demo_stain_normalizer <https://github.com/Peter554/StainTools/blob/master/demo_stain_normalizer.ipynb>`__ for an example.
 
-- **Stain Augmentation**. For this we simply augment a single image by decomposing it into the stain matrix S and the concentration matrix C, perturbing the concentrations somewhat and the recombining to be get an augmented image. This is implemented in the class :code:`StainAugmentor`. See the demo notebook `demo_stain_augmentor <https://github.com/Peter554/StainTools/blob/master/demo_stain_augmentor.ipynb>`__ for an example.
+- **Stain Augmentation**. For this we simply augment a single image by decomposing it into the stain matrix S and the concentration matrix C, perturbing the concentrations somewhat and then recombining to be get an augmented image. This is implemented in the class :code:`StainAugmentor`. See the demo notebook `demo_stain_augmentor <https://github.com/Peter554/StainTools/blob/master/demo_stain_augmentor.ipynb>`__ for an example.
 
 We also implement a simpler color normalizer, the :code:`ReinhardColorNormalizer`, which normalizes images according to the method of *E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, ‘Color transfer between images’*. This method does not consider the details of stain matrices etc. Instead it simply maps the color distribution mean and standard deviation to match that of another target image. See the demo notebook `demo_reinhard_color_normalizer <https://github.com/Peter554/StainTools/blob/master/demo_reinhard_color_normalizer.ipynb>`__ for an example.
 
