@@ -1,7 +1,7 @@
 StainTools
 ==========
 
-Tools for tissue image stain normalization and augmentation in Python (tested on 3.5).
+Tools for tissue image stain normalization and augmentation in Python 3.
 
 .. image:: https://i.imgur.com/sS8AKaV.png
     :width: 95%
