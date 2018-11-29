@@ -7,6 +7,6 @@ from .stain_augmentor import StainAugmentor
 from .reinhard_color_normalizer import ReinhardColorNormalizer
 
 from .utils.brightness_standardizer import BrightnessStandardizer
-from .utils.misc_utils import get_luminosity_mask
+from .utils.misc_utils import get_tissue_mask
 from .utils.visualization_utils import read_image, plot_image, \
     plot_row_colors, make_image_stack, plot_image_stack

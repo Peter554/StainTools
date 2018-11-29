@@ -1,5 +1,5 @@
 Contributing
-=========
+============
 
 Contributions are welcome.  For example:
 

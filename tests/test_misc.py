@@ -1,9 +1,11 @@
 import os
 from pathlib import Path
-import staintools
-from staintools.stain_extractors.vahadane_stain_extractor import VahadaneStainExtractor, VahadaneStainExtractorException
-from staintools.utils.misc_utils import *
 import numpy as np
+
+import staintools
+from staintools.stain_extractors.vahadane_stain_extractor import VahadaneStainExtractor
+from staintools.utils.misc_utils import *
+from staintools.utils.exceptions import *
 
 
 def test_normalize_rows():
@@ -25,17 +27,27 @@ def test_is_uint8_image():
     x = x / 255
     assert not is_uint8_image(x)
 
+def test_tissue_mask_for_white_image():
+    x = np.zeros(shape=(100, 100, 3), dtype=np.uint8)
+    x[:] = 255
 
-def test_vahadane_stain_extractor():
-    script_dir = Path(os.path.dirname(os.path.abspath(__file__)))
-    i1 = staintools.read_image(str(script_dir / ".." / "data" / "i1.png"))
-    x = np.zeros(shape=i1.shape, dtype=np.uint8)
+    # Ensure the proper exception is raised
+    try:
+        get_tissue_mask(x, 0.8)
+    except TissueMaskException as e:
+        print(e)
+        assert True
+        return
+    assert False
+
+def test_vahadane_stain_extractor_for_white_image():
+    x = np.zeros(shape=(100, 100, 3), dtype=np.uint8)
     x[:] = 255
 
     # Ensure the proper exception is raised
     try:
         VahadaneStainExtractor.get_stain_matrix(x)
-    except VahadaneStainExtractorException as e:
+    except TissueMaskException as e:
         print(e)
         assert True
         return

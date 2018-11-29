@@ -5,7 +5,7 @@ import copy
 
 from staintools.stain_extractors.macenko_stain_extractor import MacenkoStainExtractor
 from staintools.stain_extractors.vahadane_stain_extractor import VahadaneStainExtractor
-from staintools.utils.misc_utils import get_luminosity_mask
+from staintools.utils.misc_utils import get_tissue_mask
 
 
 class StainAugmentor(object):
@@ -32,7 +32,7 @@ class StainAugmentor(object):
         self.stain_matrix = self.extractor.get_stain_matrix(I)
         self.source_concentrations = self.extractor.get_concentrations(I, self.stain_matrix)
         self.n_stains = self.source_concentrations.shape[1]
-        self.tissue_mask = get_luminosity_mask(I).ravel()
+        self.tissue_mask = get_tissue_mask(I).ravel()
 
     def transform(self):
         """

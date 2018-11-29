@@ -3,13 +3,7 @@ from __future__ import division
 import spams
 
 from staintools.stain_extractors.abc_stain_extractor import StainExtractor
-from staintools.utils.misc_utils import convert_RGB_to_OD, normalize_rows, get_luminosity_mask
-
-
-class VahadaneStainExtractorException(Exception):
-    def __init__(self, *args, **kwargs):
-        Exception.__init__(self, *args, **kwargs)
-
+from staintools.utils.misc_utils import convert_RGB_to_OD, normalize_rows, get_tissue_mask
 
 class VahadaneStainExtractor(StainExtractor):
 
@@ -26,13 +20,9 @@ class VahadaneStainExtractor(StainExtractor):
         :return:
         """
         # convert to OD and ignore background
-        tissue_mask = get_luminosity_mask(I, threshold=luminosity_threshold).reshape((-1,))
+        tissue_mask = get_tissue_mask(I, luminosity_threshold=luminosity_threshold).reshape((-1,))
         OD = convert_RGB_to_OD(I).reshape((-1, 3))
         OD = OD[tissue_mask]
-
-        # Check if OD is fully masked
-        if OD.size == 0:
-            raise VahadaneStainExtractorException("Could not compute stain norm for the given input array")
 
         # do the dictionary learning
         dictionary = spams.trainDL(X=OD.T, K=2, lambda1=dictionary_regularizer, mode=2,

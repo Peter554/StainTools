@@ -19,3 +19,14 @@ _build
 staintools\.egg-info/
 
 *.pyc
+
+.vscode
+
+*.ipynb
+!demos/*.ipynb
+
+*.png
+!data/*.png
+
+*.jpg
+*.jpeg

@@ -3,7 +3,7 @@ from __future__ import division
 import numpy as np
 
 from staintools.stain_extractors.abc_stain_extractor import StainExtractor
-from staintools.utils.misc_utils import convert_RGB_to_OD, normalize_rows, get_luminosity_mask
+from staintools.utils.misc_utils import convert_RGB_to_OD, normalize_rows, get_tissue_mask
 
 
 class MacenkoStainExtractor(StainExtractor):
@@ -21,7 +21,7 @@ class MacenkoStainExtractor(StainExtractor):
         :return:
         """
         # convert to OD and ignore background
-        tissue_mask = get_luminosity_mask(I, threshold=luminosity_threshold).reshape((-1,))
+        tissue_mask = get_tissue_mask(I, luminosity_threshold=luminosity_threshold).reshape((-1,))
         OD = convert_RGB_to_OD(I).reshape((-1, 3))
         OD = OD[tissue_mask]
 
