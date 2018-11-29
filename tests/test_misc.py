@@ -1,3 +1,7 @@
+import os
+from pathlib import Path
+import staintools
+from staintools.stain_extractors.vahadane_stain_extractor import VahadaneStainExtractor, VahadaneStainExtractorException
 from staintools.utils.misc_utils import *
 import numpy as np
 
@@ -20,3 +24,19 @@ def test_is_uint8_image():
     assert is_uint8_image(x)
     x = x / 255
     assert not is_uint8_image(x)
+
+
+def test_vahadane_stain_extractor():
+    script_dir = Path(os.path.dirname(os.path.abspath(__file__)))
+    i1 = staintools.read_image(str(script_dir / ".." / "data" / "i1.png"))
+    x = np.zeros(shape=i1.shape, dtype=np.uint8)
+    x[:] = 255
+
+    # Ensure the proper exception is raised
+    try:
+        VahadaneStainExtractor.get_stain_matrix(x)
+    except VahadaneStainExtractorException as e:
+        print(e)
+        assert True
+        return
+    assert False
