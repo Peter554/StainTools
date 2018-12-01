@@ -3,7 +3,7 @@ import copy
 
 from staintools.stain_extractors.macenko_stain_extractor import MacenkoStainExtractor
 from staintools.stain_extractors.vahadane_stain_extractor import VahadaneStainExtractor
-from staintools.utils.misc import get_tissue_mask
+from staintools.utils.tissue_mask import get_tissue_mask
 
 
 class StainAugmentor(object):

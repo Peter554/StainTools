@@ -2,7 +2,7 @@
 import numpy as np
 import cv2 as cv
 
-from staintools.utils.misc import is_uint8_image
+from staintools.utils.image_checks import is_uint8_image
 
 
 class BrightnessStandardizer(object):

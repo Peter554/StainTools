@@ -3,9 +3,7 @@ Miscellaneous utilities.
 """
 
 import numpy as np
-import cv2 as cv
 
-from staintools.utils.exceptions import *
 
 def remove_zeros(I):
     """
@@ -55,27 +53,6 @@ def normalize_rows(A):
     return A / np.linalg.norm(A, axis=1)[:, None]
 
 
-def get_tissue_mask(I, luminosity_threshold=0.8):
-    """
-    Get a binary mask where true denotes pixels with a luminosity less than the specified threshold.
-    Typically we use to identify tissue in the image and exclude the bright white background.
-
-    :param I: RGB uint 8 image.
-    :param luminosity_threshold: Luminosity threshold.
-    :return: Binary mask.
-    """
-    assert is_uint8_image(I), "Image should be RGB uint8."
-    I_LAB = cv.cvtColor(I, cv.COLOR_RGB2LAB)
-    L = I_LAB[:, :, 0] / 255.0  # Convert to range [0,1].
-    mask = L < luminosity_threshold
-
-    # Check it's not empty
-    if mask.sum() == 0:
-        raise TissueMaskException("Empty tissue mask computed")
-
-    return mask
-
-
 def get_sign(x):
     """
     Returns the sign of x.
@@ -109,59 +86,3 @@ def array_equal(A, B, eps=1e-5):
     return True
 
 
-def is_image(x):
-    """
-    Is x an image?
-    i.e. numpy array of 2 or 3 dimensions.
-
-    :param x: Input.
-    :return: True/False.
-    """
-    if not isinstance(x, np.ndarray):
-        return False
-    if x.ndim not in [2, 3]:
-        return False
-    return True
-
-
-def is_gray_image(x):
-    """
-    Is x a gray image?
-
-    :param x: Input.
-    :return: True/False.
-    """
-    if not is_image(x):
-        return False
-    squeezed = x.squeeze()
-    if not squeezed.ndim == 2:
-        return False
-    return True
-
-
-def is_uint8_image(x):
-    """
-    Is x a uint8 image?
-
-    :param x: Input.
-    :return: True/False.
-    """
-    if not is_image(x):
-        return False
-    if x.dtype != np.uint8:
-        return False
-    return True
-
-
-def check_image_and_squeeze_if_gray(I):
-    """
-    Check that I is an image and squeeze to 2D if it is gray.
-
-    :param I:
-    :return:
-    """
-    assert is_image(I), "Should be an image (2 or 3D numpy array)."
-    if is_gray_image(I):
-        return I.squeeze()
-    else:
-        return I

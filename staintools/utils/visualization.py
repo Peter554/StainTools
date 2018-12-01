@@ -7,7 +7,7 @@ import cv2 as cv
 import os
 import matplotlib.pyplot as plt
 
-from staintools.utils.misc import check_image_and_squeeze_if_gray
+from staintools.utils.image_checks import check_image_and_squeeze_if_gray
 
 
 ###
@@ -51,13 +51,13 @@ def plot_row_colors(C, fig_size=6, title=None):
     plt.axis([0, 1, -0.5, N-0.5])
 
 
-def plot_image(image, now=True, fig_size=10, title=None):
+def plot_image(image, show=True, fig_size=10, title=None):
     """
     Plot an image (np.array).
     Caution: Rescales image to be in range [0,1].
 
     :param image:
-    :param now: plt.show() now?
+    :param show: plt.show() now?
     :param fig_size: Size of largest dimension
     :param title: Image title
     :return:
@@ -75,7 +75,7 @@ def plot_image(image, now=True, fig_size=10, title=None):
     plt.axis("off")
     if title is not None:
         plt.title(title)
-    if now:
+    if show:
         plt.show()
 
 
@@ -102,7 +102,7 @@ def make_image_stack(images):
     return stack
 
 
-def plot_image_stack(ims, width=5, sub_sample=False, rand=False, save_name=None, title_list=None):
+def plot_image_stack(ims, width=5, sub_sample=False, rand=False, save_name=None, title_list=None, show=True):
     """
     Display a grid of images.
 
@@ -112,6 +112,7 @@ def plot_image_stack(ims, width=5, sub_sample=False, rand=False, save_name=None,
     :param rand: Should the subsample be randomized?
     :param save_name: File name to save to.
     :param title_list: A list of titles. Should only be used when sub_sample is false.
+    :param show: plt.show() now?
     :return:
     """
     N_all = np.shape(ims)[0]
@@ -135,10 +136,11 @@ def plot_image_stack(ims, width=5, sub_sample=False, rand=False, save_name=None,
         plt.subplot(height, width, i + 1)
         if title_list is not None:
             plt.title(title_list[i])
-        plot_image(stack[i], now=False, fig_size=None)
+        plot_image(stack[i], show=False, fig_size=None)
 
     if save_name is not None:
         os.makedirs(os.path.dirname(save_name), exist_ok=True)
         plt.savefig(save_name)
 
-    plt.show()
+    if show:
+        plt.show()

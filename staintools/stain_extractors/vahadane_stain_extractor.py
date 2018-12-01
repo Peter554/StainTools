@@ -1,7 +1,9 @@
 import spams
 
 from staintools.stain_extractors.abc_stain_extractor import StainExtractor
-from staintools.utils.misc import convert_RGB_to_OD, normalize_rows, get_tissue_mask
+from staintools.utils.misc import convert_RGB_to_OD, normalize_rows
+from staintools.utils.tissue_mask import get_tissue_mask
+
 
 class VahadaneStainExtractor(StainExtractor):
 

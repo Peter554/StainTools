@@ -11,5 +11,5 @@ from .stain_augmentor import StainAugmentor
 from .reinhard_color_normalizer import ReinhardColorNormalizer
 
 from .utils.brightness_standardizer import BrightnessStandardizer
-from .utils.misc import get_tissue_mask
+from .utils.tissue_mask import get_tissue_mask
 from .utils.visualization import *

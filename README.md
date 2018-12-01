@@ -1,5 +1,6 @@
 # StainTools
-**https://hackmd.io/s/SJ7o7pk1N**
+README @ **https://hackmd.io/s/SJ7o7pk1N**
+(README images @ https://imgur.com/a/2Ako12n)
 
 Tools for tissue image stain normalization and augmentation in Python 3.
 
@@ -15,13 +16,13 @@ StainTools requires the SPAMS (SPArse Modeling Software) package. Please find ou
 
 ### Normalization
 
-Original images:
-
-![Imgur](https://i.imgur.com/sS8AKaV.png)
+Original images: 
+[(Bigger)](https://imgur.com/2hRBZ25.png)
+![](https://imgur.com/2hRBZ25.png)
 
 Stain normalized images:
-
-![Imgur](https://i.imgur.com/PzY0fE7.png)
+[(Bigger)](https://imgur.com/n3u87IP.png)
+![](https://imgur.com/n3u87IP.png)
 
 ```python
 # Read data
@@ -36,10 +37,13 @@ to_transform = standardizer.transform(to_transform)
 # Stain normalize
 normalizer = staintools.StainNormalizer(method='vahadane')
 normalizer.fit(target)
-to_transform = normalizer.transform(to_transform)
+transformed = normalizer.transform(to_transform)
 ```
 
 ### Augmentation
+
+[(Bigger)](https://imgur.com/v9R1aGQ.png)
+![](https://imgur.com/v9R1aGQ.png)
 
 ```python
 # Read data
@@ -66,7 +70,7 @@ The data used for the above example is available [here](https://drive.google.com
 
 For more examples see the file `manual_tests.py`
 
-## Basic theory
+## More detail
 
 Histology images are often stained with the Hematoxylin & Eosin (H&E) stains. These two chemicals typically stain: the nuclei a dark purple (Hematoxylin) and the cytoplasm a light pink (Eosin). Thus all pixels in an idealized histology image are principally composed of two colors. These stain colors vary from image to image and may be summarised in a stain matrix:
 
@@ -86,23 +90,23 @@ If we flatten the OD image so that it is Npix x 3, with Npix being the total num
 
 <img src="https://i.imgur.com/G9noDOC.png" class="math xs"/>
 
-A `StainExtractor` provides methods for estimating the stain matrix S and a concentration matrix C given an image.  First the optical density array OD is calculated for the given image. The stain matrix S may then be calculated by the desired methodology (see below). The concentration matrix C is finally obtained by 'solving' the above equation. I say 'solving' here as in general there is no exact solution to the above equation. An idealized image will be made up of exactly two color - the stains - however for real world histology images we may only expect to approximately compose the image using just these two primary colors.
+A [`StainExtractor`](https://github.com/Peter554/StainTools/blob/master/staintools/stain_extractors/abc_stain_extractor.py) provides methods for estimating the stain matrix S and a concentration matrix C given an image.  First the optical density array OD is calculated for the given image. The stain matrix S may then be calculated by the desired methodology (see below). The concentration matrix C is finally obtained by 'solving' the above equation. I say 'solving' here as in general there is no exact solution to the above equation. An idealized image will be made up of exactly two color - the stains - however for real world histology images we may only expect to approximately compose the image using just these two primary colors.
 
 We implement:
 
-- `VahadaneStainExtractor`. Stain matrix estimation via method of *A. Vahadane et al., “Structure-Preserving Color Normalization and Sparse Stain Separation for Histological Images”*. This method takes a dictionary learning based approach to find the two basis stains that best fit the image. See the paper for details.
+- [`VahadaneStainExtractor`](https://github.com/Peter554/StainTools/blob/master/staintools/stain_extractors/vahadane_stain_extractor.py). Stain matrix estimation via method of *A. Vahadane et al., “Structure-Preserving Color Normalization and Sparse Stain Separation for Histological Images”*. This method takes a dictionary learning based approach to find the two basis stains that best fit the image. See the paper for details.
 
-- `MacenkoStainExtractor`. Stain matrix estimation via method of *M. Macenko et al., "A method for normalizing histology slides for quantitative analysis"*. This method considers the projection of pixels onto the 2D plane defined by the two principle eigenvectors of the optical density covariance matrix. It then considers the extreme directions (in terms of angular polar coordinate) in this plane. See the paper for details.
+- [`MacenkoStainExtractor`](https://github.com/Peter554/StainTools/blob/master/staintools/stain_extractors/macenko_stain_extractor.py). Stain matrix estimation via method of *M. Macenko et al., "A method for normalizing histology slides for quantitative analysis"*. This method considers the projection of pixels onto the 2D plane defined by the two principle eigenvectors of the optical density covariance matrix. It then considers the extreme directions (in terms of angular polar coordinate) in this plane. See the paper for details.
 
-In both cases it is preferable to first remove background pixels - white pixels of the image where no tissue is present - as these will not be composed of simply the two primary stains. We attempt to isolate tissue by a thresholding on the pixel luminosity. For some images that are dimly lit however the background is not bright enough and therefore it may be helpful to standardize the brightness of any image first. For this we implement a `BrightnessStandardizer`, which enforces an image to have at least 5% of pixels being luminosity saturated.
+In both cases it is preferable to first remove background pixels - white pixels of the image where no tissue is present - as these will not be composed of simply the two primary stains. We attempt to isolate tissue by a thresholding on the pixel luminosity. For some images that are dimly lit however the background is not bright enough and therefore it may be helpful to standardize the brightness of any image first. For this we implement a [`BrightnessStandardizer`](https://github.com/Peter554/StainTools/blob/master/staintools/utils/brightness_standardizer.py), which enforces an image to have at least 5% of pixels being luminosity saturated.
 
 Once we have the stain and concentration matrices we are able to easily carry out.
 
-- **Stain Normalization**. This basically involves casting one image in the stain colors of a target image. For this we basically decompose the images into the stain matrix S and the concentration matrix C, then replace the stain matrix of the image to be transformed with that of the target image. We then recombine to give the final stain normalized image. This is implemented in the class `StainNormalizer`.
+- **Stain Normalization**. This basically involves casting one image in the stain colors of a target image. For this we basically decompose the images into the stain matrix S and the concentration matrix C, then replace the stain matrix of the image to be transformed with that of the target image. We then recombine to give the final stain normalized image. This is implemented in the class [`StainNormalizer`](https://github.com/Peter554/StainTools/blob/master/staintools/stain_normalizer.py).
 
-- **Stain Augmentation**. For this we simply augment a single image by decomposing it into the stain matrix S and the concentration matrix C, perturbing the concentrations somewhat and then recombining to be get an augmented image. This is implemented in the class `StainAugmentor`.
+- **Stain Augmentation**. For this we simply augment a single image by decomposing it into the stain matrix S and the concentration matrix C, perturbing the concentrations somewhat and then recombining to be get an augmented image. This is implemented in the class [`StainAugmentor`](https://github.com/Peter554/StainTools/blob/master/staintools/stain_augmentor.py).
 
-We also implement a simpler color normalizer, the `ReinhardColorNormalizer`, which normalizes images according to the method of *E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, "Color transfer between images"*. This method does not consider the details of stain matrices etc. Instead it simply maps the color distribution mean and standard deviation to match that of another target image.
+We also implement a simpler color normalizer, the [`ReinhardColorNormalizer`](https://github.com/Peter554/StainTools/blob/master/staintools/reinhard_color_normalizer.py), which normalizes images according to the method of *E. Reinhard, M. Adhikhmin, B. Gooch, and P. Shirley, "Color transfer between images"*. This method does not consider the details of stain matrices etc. Instead it simply maps the color distribution mean and standard deviation to match that of another target image.
 
 <style>
     .math {

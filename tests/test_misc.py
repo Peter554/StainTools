@@ -1,5 +1,7 @@
+from staintools.utils.tissue_mask import get_tissue_mask
 from staintools.utils.misc import *
 from staintools.utils.exceptions import *
+from staintools.utils.image_checks import *
 
 
 def test_normalize_rows():
