@@ -7,9 +7,9 @@ import numpy as np
 
 def remove_zeros(I):
     """
-    Remove zeros in an image, replace with 1's.
+    Remove zeros in an array, replace with 1's.
 
-    :param I: An Array.
+    :param I: Array.
     :return: New array where 0's have been replaced with 1's.
     """
     mask = (I == 0)
@@ -27,7 +27,8 @@ def convert_RGB_to_OD(I):
     :return: Optical denisty RGB image.
     """
     I = remove_zeros(I)  # we don't want to take the log of zero.
-    return -1 * np.log(I / 255)
+    eps = 1e-6 # For numerical stability.
+    return np.maximum(-1 * np.log(I / 255), eps)
 
 
 def convert_OD_to_RGB(OD):
@@ -40,6 +41,8 @@ def convert_OD_to_RGB(OD):
     :return: Image RGB uint8.
     """
     assert OD.min() >= 0, "Negative optical density."
+    eps = 1e-6 # For numerical stability.
+    OD = np.maximum(OD, eps)
     return (255 * np.exp(-1 * OD)).astype(np.uint8)
 
 
