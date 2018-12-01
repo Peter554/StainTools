@@ -38,8 +38,15 @@ echo "";
 bumpversion $releasetype;
 
 # Make the dist
-echo "";
-python setup.py sdist;
+{
+    echo "";
+    python setup.py sdist;
+} || { 
+    echo "";
+    echo "Error with setup.py";
+    exit;
+}
+
 
 # Upload to PyPI
 error="true";
