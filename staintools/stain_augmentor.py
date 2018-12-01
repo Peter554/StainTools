@@ -10,7 +10,7 @@ from staintools.utils.misc_utils import get_tissue_mask
 
 class StainAugmentor(object):
 
-    def __init__(self, method, sigma1=0.2, sigma2=0.2, include_background=True):
+    def __init__(self, method, sigma1=0.2, sigma2=0.2, augment_background=True):
         if method.lower() == 'macenko':
             self.extractor = MacenkoStainExtractor
         elif method.lower() == 'vahadane':
@@ -19,7 +19,7 @@ class StainAugmentor(object):
             raise Exception('Method not recognized.')
         self.sigma1 = sigma1
         self.sigma2 = sigma2
-        self.include_background = include_background
+        self.augment_background = augment_background
 
     def fit(self, I):
         """
@@ -34,9 +34,9 @@ class StainAugmentor(object):
         self.n_stains = self.source_concentrations.shape[1]
         self.tissue_mask = get_tissue_mask(I).ravel()
 
-    def transform(self):
+    def pop(self):
         """
-        Transform to produce an augmented version of the fitted image.
+        Get an augmented version of the fitted image.
 
         :return:
         """
@@ -45,7 +45,7 @@ class StainAugmentor(object):
         for i in range(self.n_stains):
             alpha = np.random.uniform(1 - self.sigma1, 1 + self.sigma1)
             beta = np.random.uniform(-self.sigma2, self.sigma2)
-            if self.include_background:
+            if self.augment_background:
                 augmented_concentrations[:, i] *= alpha
                 augmented_concentrations[:, i] += beta
             else:
