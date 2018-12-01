@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setup(
     name='staintools',
-    version='1.4.0',
+    version='1.4.1',
     description='A package for tissue image stain normalization, augmentation and more.',
     long_description=readme,
     author='Peter Byfield',
