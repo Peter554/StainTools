@@ -1,9 +1,8 @@
-from __future__ import division
 
 import numpy as np
 import cv2 as cv
 
-from staintools.utils.misc_utils import is_uint8_image
+from staintools.utils.misc import is_uint8_image
 
 
 class BrightnessStandardizer(object):

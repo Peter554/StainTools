@@ -1,10 +1,8 @@
-from __future__ import division
-
 import numpy as np
 
 from staintools.stain_extractors.macenko_stain_extractor import MacenkoStainExtractor
 from staintools.stain_extractors.vahadane_stain_extractor import VahadaneStainExtractor
-from staintools.utils.misc_utils import convert_OD_to_RGB
+from staintools.utils.misc import convert_OD_to_RGB
 
 
 class StainNormalizer(object):

@@ -2,8 +2,6 @@
 Exceptions
 """
 
-from __future__ import division
-
 
 class TissueMaskException(Exception):
     def __init__(self, *args, **kwargs):

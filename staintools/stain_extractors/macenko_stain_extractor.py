@@ -1,9 +1,7 @@
-from __future__ import division
-
 import numpy as np
 
 from staintools.stain_extractors.abc_stain_extractor import StainExtractor
-from staintools.utils.misc_utils import convert_RGB_to_OD, normalize_rows, get_tissue_mask
+from staintools.utils.misc import convert_RGB_to_OD, normalize_rows, get_tissue_mask
 
 
 class MacenkoStainExtractor(StainExtractor):

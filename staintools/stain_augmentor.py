@@ -1,11 +1,9 @@
-from __future__ import division
-
 import numpy as np
 import copy
 
 from staintools.stain_extractors.macenko_stain_extractor import MacenkoStainExtractor
 from staintools.stain_extractors.vahadane_stain_extractor import VahadaneStainExtractor
-from staintools.utils.misc_utils import get_tissue_mask
+from staintools.utils.misc import get_tissue_mask
 
 
 class StainAugmentor(object):

@@ -1,10 +1,7 @@
-from __future__ import division
-
 from abc import ABC, abstractmethod
-import numpy as np
 import spams
 
-from staintools.utils.misc_utils import convert_RGB_to_OD
+from staintools.utils.misc import convert_RGB_to_OD
 
 
 class StainExtractor(ABC):
