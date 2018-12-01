@@ -35,6 +35,7 @@ git commit -m 'About to bump version';
 
 # Bump the version
 echo "";
+echo "Bumping version";
 bumpversion $releasetype;
 
 # Make the dist
