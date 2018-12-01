@@ -23,21 +23,25 @@ while true; do
     echo "Sorry, I didn't recognize that. Try again.";
 done
 
+# Remove any old dists 
 echo "";
 rm -rf ./dist;
 
-# Just to be safe
+# Add and commit any unsaved changes with a generic commit message
 echo "";
 git add .;
 echo "";
 git commit -m 'About to bump version';
 
+# Bump the version
 echo "";
 bumpversion $releasetype;
 
+# Make the dist
 echo "";
 python setup.py sdist;
 
+# Upload to PyPI
 error="true";
 while [ $error == "true" ]; do
     error="false";
@@ -51,9 +55,11 @@ while [ $error == "true" ]; do
     }
 done
 
+# Clean up the dists
 echo "";
 rm -rf ./dist;
 
+# Push to GitHub
 error="true";
 while [ $error == "true" ]; do
     error="false";
@@ -67,6 +73,7 @@ while [ $error == "true" ]; do
     }
 done
 
+# And push the tags
 error="true";
 while [ $error == "true" ]; do
     error="false";
