@@ -12,13 +12,14 @@ setup(
     author_email='byfield554@gmail.com',
     url='https://github.com/Peter554/StainTools',
     packages=find_packages(exclude=('tests')),
-    install_requires=['numpy',
-                      'opencv-python',
-                      'matplotlib',
-                      'jupyter',
-                      'future',
-                      'cython'
-                      ],
+    install_requires=[
+        'numpy',
+        'opencv-python',
+        'matplotlib',
+        'jupyter',
+        'future',
+        'cython'
+    ],
     classifiers=[
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
