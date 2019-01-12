@@ -1,20 +1,4 @@
-"""
-Miscellaneous miscellaneous.
-"""
-
 import numpy as np
-
-
-# def remove_zeros(I):
-#     """
-#     Remove zeros in an array, replace with 1's.
-#
-#     :param I: Array.
-#     :return: New array where 0's have been replaced with 1's.
-#     """
-#     mask = (I == 0)
-#     I[mask] = 1
-#     return I
 
 
 def convert_RGB_to_OD(I):

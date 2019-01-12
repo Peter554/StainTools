@@ -4,6 +4,7 @@ from staintools.stain_extraction.abc_stain_extractor import ABCStainExtractor
 from staintools.miscellaneous.miscellaneous_functions import normalize_matrix_rows
 from staintools.miscellaneous.optical_density_conversion import convert_RGB_to_OD
 from staintools.tissue_masks.luminosity_threshold_tissue_locator import LuminosityThresholdTissueLocator
+from staintools.preprocessing.input_validation import is_uint8_image
 
 
 class MacenkoStainExtractor(ABCStainExtractor):
@@ -19,6 +20,7 @@ class MacenkoStainExtractor(ABCStainExtractor):
         :param angular_percentile:
         :return:
         """
+        assert is_uint8_image(I), "Image should be RGB uint8."
         # Convert to OD and ignore background
         tissue_mask = LuminosityThresholdTissueLocator.get_tissue_mask(I, luminosity_threshold=luminosity_threshold).reshape((-1,))
         OD = convert_RGB_to_OD(I).reshape((-1, 3))

@@ -1,23 +1,23 @@
 import numpy as np
 
 
-def is_image(x):
+def is_image(I):
     """
-    Is x an image.
+    Is I an image.
     """
-    if not isinstance(x, np.ndarray):
+    if not isinstance(I, np.ndarray):
         return False
-    if not x.ndim == 3:
+    if not I.ndim == 3:
         return False
     return True
 
 
-def is_uint8_image(x):
+def is_uint8_image(I):
     """
-    Is x a uint8 image.
+    Is I a uint8 image.
     """
-    if not is_image(x):
+    if not is_image(I):
         return False
-    if x.dtype != np.uint8:
+    if I.dtype != np.uint8:
         return False
     return True
