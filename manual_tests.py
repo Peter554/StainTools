@@ -14,10 +14,10 @@ i4 = staintools.read_image("./data/i4.png")
 i5 = staintools.read_image("./data/i5.png")
 
 # Plot
-stack = staintools.make_image_stack([i1, i2, i3, i4, i5])
+images = [i1, i2, i3, i4, i5]
 titles = ["Target"] + ["Original"] * 4
-staintools.plot_image_stack(stack, width=5, title_list=titles, \
-                            save_name=RESULTS_DIR + 'original-images.png', show=0)
+staintools.plot_image_list(images, width=5, title_list=titles, \
+                           save_name=RESULTS_DIR + 'original-images.png', show=0)
 
 # =========================
 # Brightness standarization
@@ -27,17 +27,16 @@ staintools.plot_image_stack(stack, width=5, title_list=titles, \
 if STANDARDIZE_BRIGHTNESS:
 
     # Standardize brightness
-    standardizer = staintools.BrightnessStandardizer()
-    i1 = standardizer.transform(i1)
-    i2 = standardizer.transform(i2)
-    i3 = standardizer.transform(i3)
-    i4 = standardizer.transform(i4)
-    i5 = standardizer.transform(i5)
+    i1 = staintools.LuminosityStandardizer.standardize(i1)
+    i2 = staintools.LuminosityStandardizer.standardize(i2)
+    i3 = staintools.LuminosityStandardizer.standardize(i3)
+    i4 = staintools.LuminosityStandardizer.standardize(i4)
+    i5 = staintools.LuminosityStandardizer.standardize(i5)
 
     # Plot
-    stack = staintools.make_image_stack([i1, i2, i3, i4, i5])
+    images = [i1, i2, i3, i4, i5]
     titles = ["Target standardized"] + ["Original standardized"] * 4
-    staintools.plot_image_stack(stack, width=5, title_list=titles, \
+    staintools.plot_image_list(images, width=5, title_list=titles, \
                                 save_name=RESULTS_DIR + 'original-images-standardized.png', show=0)
 
 # ===================
@@ -53,9 +52,9 @@ i4_normalized = normalizer.transform(i4)
 i5_normalized = normalizer.transform(i5)
 
 # Plot
-stack = staintools.make_image_stack([i1, i2_normalized, i3_normalized, i4_normalized, i5_normalized])
+images = [i1, i2_normalized, i3_normalized, i4_normalized, i5_normalized]
 titles = ["Target"] + ["Stain normalized"] * 4
-staintools.plot_image_stack(stack, width=5, title_list=titles, \
+staintools.plot_image_list(images, width=5, title_list=titles, \
                             save_name=RESULTS_DIR + 'stain-normalized-images.png', show=0)
 
 # ==================
@@ -71,7 +70,6 @@ for _ in range(10):
     augmented_images.append(augmented_image)
 
 # Plot
-stack = staintools.make_image_stack(augmented_images)
 titles = ["Augmented"] * 10
-staintools.plot_image_stack(stack, width=5, title_list=titles, \
+staintools.plot_image_list(augmented_images, width=5, title_list=titles, \
                             save_name=RESULTS_DIR + 'stain-augmented-images.png', show=0)

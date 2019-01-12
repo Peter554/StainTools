@@ -1,19 +1,13 @@
-
 import numpy as np
 import cv2 as cv
 
-from staintools.utils.image_checks import is_uint8_image
+from staintools.preprocessing.input_validation import is_uint8_image
 
 
-class BrightnessStandardizer(object):
-    """
-    A class for standardizing image brightness. This can improve performance of other normalizers etc.
-    """
+class LuminosityStandardizer(object):
 
-    def __init__(self):
-        pass
-
-    def transform(self, I, percentile=95):
+    @staticmethod
+    def standardize(I, percentile=95):
         """
         Transform image I to standard brightness.
         Modifies the luminosity channel such that a fixed percentile is saturated.

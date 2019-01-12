@@ -1,30 +1,6 @@
-"""
-Visualization utilities.
-"""
-
 import numpy as np
-import cv2 as cv
 import os
 import matplotlib.pyplot as plt
-
-from staintools.utils.image_checks import check_image_and_squeeze_if_gray
-
-
-###
-
-def read_image(path):
-    """
-    Read an image to RGB uint8.
-    Read with opencv (cv) and covert from BGR colorspace to RGB.
-
-    :param path: The path to the image.
-    :return: RGB uint8 image.
-    """
-    assert os.path.isfile(path), "File not found"
-    im = cv.imread(path)
-    # Convert from cv2 standard of BGR to our convention of RGB.
-    im = cv.cvtColor(im, cv.COLOR_BGR2RGB)
-    return im
 
 
 def plot_row_colors(C, fig_size=6, title=None):
@@ -37,6 +13,7 @@ def plot_row_colors(C, fig_size=6, title=None):
     assert isinstance(C, np.ndarray), "C must be a numpy array."
     assert C.ndim == 2, "C must be 2D."
     assert C.shape[1] == 3, "C must have 3 columns."
+
     N = C.shape[0]
     range255 = C.max() > 1.0  # quick check to see if we have an image in range [0,1] or [0,255].
     plt.rcParams['figure.figsize'] = (fig_size, fig_size)
@@ -56,57 +33,30 @@ def plot_image(image, show=True, fig_size=10, title=None):
     Plot an image (np.array).
     Caution: Rescales image to be in range [0,1].
 
-    :param image:
+    :param image: RGB uint8
     :param show: plt.show() now?
     :param fig_size: Size of largest dimension
     :param title: Image title
     :return:
     """
-    image = check_image_and_squeeze_if_gray(image)
-    is_gray = True if image.ndim == 2 else False
     image = image.astype(np.float32)
     m, M = image.min(), image.max()
     if fig_size is not None:
         plt.rcParams['figure.figsize'] = (fig_size, fig_size)
-    if is_gray:
-        plt.imshow((image - m) / (M - m), cmap='gray')
     else:
         plt.imshow((image - m) / (M - m))
-    plt.axis("off")
     if title is not None:
         plt.title(title)
+    plt.axis("off")
     if show:
         plt.show()
 
 
-def make_image_stack(images):
-    """
-    Build a stack of images from a tuple/list of images.
-
-    :param images: A tuple/list of images.
-    :return:
-    """
-    N = len(images)
-    images = [check_image_and_squeeze_if_gray(image) for image in images]
-    for image in images:
-        assert image.ndim == images[0].ndim  # check all images have same number of dimensions.
-    is_gray = True if images[0].ndim == 2 else False
-    if is_gray:
-        h, w = images[0].shape
-        stack = np.zeros((N, h, w))
-    else:
-        h, w, c = images[0].shape
-        stack = np.zeros((N, h, w, c))
-    for i in range(N):
-        stack[i] = images[i]
-    return stack
-
-
-def plot_image_stack(ims, width=5, sub_sample=False, rand=False, save_name=None, title_list=None, show=True):
+def plot_image_list(images, width=5, sub_sample=False, rand=False, save_name=None, title_list=None, show=True):
     """
     Display a grid of images.
 
-    :param ims: A patch stack.
+    :param images: List of RGB uint8
     :param width: Number of images per row.
     :param sub_sample: Number of images to subsample or false.
     :param rand: Should the subsample be randomized?
@@ -115,28 +65,22 @@ def plot_image_stack(ims, width=5, sub_sample=False, rand=False, save_name=None,
     :param show: plt.show() now?
     :return:
     """
-    N_all = np.shape(ims)[0]
-
     if sub_sample and rand:
-        N = sub_sample
-        idx = np.random.choice(range(N), sub_sample, replace=False)
-        stack = ims[idx]
+        indicies = list(np.random.choice(range(len(images)), sub_sample, replace=False))
     elif sub_sample and not rand:
-        N = sub_sample
-        stack = ims[:N]
+        indicies = range(sub_sample)
     else:
-        N = N_all
-        stack = ims
+        indicies = range(len(images))
 
-    height = np.ceil(float(N) / width).astype(int)
+    height = np.ceil(float(len(indicies)) / width).astype(int)
     plt.rcParams['figure.figsize'] = (18, (18 / width) * height)
     plt.figure()
 
-    for i in range(N):
+    for i in range(len(indicies)):
         plt.subplot(height, width, i + 1)
         if title_list is not None:
             plt.title(title_list[i])
-        plot_image(stack[i], show=False, fig_size=None)
+        plot_image(images[i], show=False, fig_size=None)
 
     if save_name is not None:
         os.makedirs(os.path.dirname(save_name), exist_ok=True)

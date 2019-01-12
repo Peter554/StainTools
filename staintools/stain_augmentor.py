@@ -1,9 +1,10 @@
 import numpy as np
 import copy
 
-from staintools.stain_extractors.macenko_stain_extractor import MacenkoStainExtractor
-from staintools.stain_extractors.vahadane_stain_extractor import VahadaneStainExtractor
-from staintools.utils.tissue_mask import get_tissue_mask
+from staintools.stain_extraction.macenko_stain_extractor import MacenkoStainExtractor
+from staintools.stain_extraction.vahadane_stain_extractor import VahadaneStainExtractor
+from staintools.tissue_masks.luminosity_threshold_tissue_locator import LuminosityThresholdTissueLocator
+from staintools.miscellaneous.get_concentrations import get_concentrations
 
 
 class StainAugmentor(object):
@@ -28,9 +29,9 @@ class StainAugmentor(object):
         """
         self.image_shape = I.shape
         self.stain_matrix = self.extractor.get_stain_matrix(I)
-        self.source_concentrations = self.extractor.get_concentrations(I, self.stain_matrix)
+        self.source_concentrations = get_concentrations(I, self.stain_matrix)
         self.n_stains = self.source_concentrations.shape[1]
-        self.tissue_mask = get_tissue_mask(I).ravel()
+        self.tissue_mask = LuminosityThresholdTissueLocator.get_tissue_mask(I).ravel()
 
     def pop(self):
         """

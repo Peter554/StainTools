@@ -1,26 +1,27 @@
 import spams
 
-from staintools.stain_extractors.abc_stain_extractor import StainExtractor
-from staintools.utils.misc import convert_RGB_to_OD, normalize_rows
-from staintools.utils.tissue_mask import get_tissue_mask
+from staintools.stain_extraction.abc_stain_extractor import ABCStainExtractor
+from staintools.miscellaneous.miscellaneous_functions import normalize_matrix_rows
+from staintools.miscellaneous.optical_density_conversion import convert_RGB_to_OD
+from staintools.tissue_masks.luminosity_threshold_tissue_locator import LuminosityThresholdTissueLocator
 
 
-class VahadaneStainExtractor(StainExtractor):
+class VahadaneStainExtractor(ABCStainExtractor):
 
     @staticmethod
     def get_stain_matrix(I, luminosity_threshold=0.8, dictionary_regularizer=0.1):
         """
         Stain matrix estimation via method of:
-        A. Vahadane et al.,
-        'Structure-Preserving Color Normalization and Sparse Stain Separation for Histological Images'
+        A. Vahadane et al. 'Structure-Preserving Color Normalization and Sparse Stain Separation for Histological Images'
 
         :param I: Image RGB uint8.
         :param luminosity_threshold:
         :param dictionary_regularizer:
         :return:
         """
+
         # convert to OD and ignore background
-        tissue_mask = get_tissue_mask(I, luminosity_threshold=luminosity_threshold).reshape((-1,))
+        tissue_mask = LuminosityThresholdTissueLocator.get_tissue_mask(I, luminosity_threshold=luminosity_threshold).reshape((-1,))
         OD = convert_RGB_to_OD(I).reshape((-1, 3))
         OD = OD[tissue_mask]
 
@@ -33,4 +34,4 @@ class VahadaneStainExtractor(StainExtractor):
         if dictionary[0, 0] < dictionary[1, 0]:
             dictionary = dictionary[[1, 0], :]
 
-        return normalize_rows(dictionary)
+        return normalize_matrix_rows(dictionary)

@@ -22,6 +22,8 @@ staintools\.egg-info/
 
 .vscode
 
+data
+
 *.ipynb
 
 *.png

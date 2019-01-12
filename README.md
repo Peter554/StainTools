@@ -1,5 +1,7 @@
 # StainTools
 
+# TODO Update
+
 **Find a more up to date README with correct formatting  on HackMD [here](https://hackmd.io/s/SJ7o7pk1N).**
 
 Tools for tissue image stain normalization and augmentation in Python 3. https://github.com/Peter554/StainTools.
