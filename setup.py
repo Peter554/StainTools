@@ -16,7 +16,6 @@ setup(
         'numpy',
         'opencv-python',
         'matplotlib',
-        'future',
         'cython'
     ]
 )
