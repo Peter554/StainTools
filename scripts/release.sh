@@ -55,7 +55,7 @@ while [ $error == "true" ]; do
     error="false";
     {
         echo "";
-        twine upload ./dist/*;
+        pipenv run twine upload ./dist/*;
     } || { 
         echo "";
         echo "Error uploading to PyPI. Did you enter the wrong credetials?";
