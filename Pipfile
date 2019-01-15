@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 staintools = {editable = true,path = "."}
+setuptools = "*"
 
 [packages]
 numpy = "*"
