@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO Needs updating
-
 while true; do
     echo "";
     read -p "This script will add modified files and commit them - is that Okay (y/n)? " go;
@@ -43,7 +41,7 @@ bumpversion $releasetype;
 # Make the dist
 {
     echo "";
-    python setup.py sdist;
+    pipenv run python setup.py sdist;
 } || { 
     echo "";
     echo "Error with setup.py";
@@ -57,7 +55,7 @@ while [ $error == "true" ]; do
     error="false";
     {
         echo "";
-        twine upload ./dist/*;
+        pipenv run twine upload ./dist/*;
     } || { 
         echo "";
         echo "Error uploading to PyPI. Did you enter the wrong credetials?";

@@ -4,8 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pytest = "*"
 staintools = {editable = true,path = "."}
+pytest = "*"
+setuptools = "*"
+twine = "*"
+bumpversion = "*"
 
 [packages]
 numpy = "*"
