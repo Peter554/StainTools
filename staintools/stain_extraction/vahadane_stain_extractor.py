@@ -10,14 +10,14 @@ from staintools.preprocessing.input_validation import is_uint8_image
 class VahadaneStainExtractor(ABCStainExtractor):
 
     @staticmethod
-    def get_stain_matrix(I, luminosity_threshold=0.8, dictionary_regularizer=0.1):
+    def get_stain_matrix(I, luminosity_threshold=0.8, regularizer=0.1):
         """
         Stain matrix estimation via method of:
         A. Vahadane et al. 'Structure-Preserving Color Normalization and Sparse Stain Separation for Histological Images'
 
         :param I: Image RGB uint8.
         :param luminosity_threshold:
-        :param dictionary_regularizer:
+        :param regularizer:
         :return:
         """
         assert is_uint8_image(I), "Image should be RGB uint8."
@@ -27,7 +27,7 @@ class VahadaneStainExtractor(ABCStainExtractor):
         OD = OD[tissue_mask]
 
         # do the dictionary learning
-        dictionary = spams.trainDL(X=OD.T, K=2, lambda1=dictionary_regularizer, mode=2,
+        dictionary = spams.trainDL(X=OD.T, K=2, lambda1=regularizer, mode=2,
                                    modeD=0, posAlpha=True, posD=True, verbose=False).T
 
         # order H and E.

@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+staintools = {editable = true,path = "."}
+
+[packages]
+numpy = "*"
+opencv-python = "*"
+matplotlib = "*"
+spams = "*"
+
+[requires]
+python_version = "3.5"

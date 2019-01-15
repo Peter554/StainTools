@@ -15,7 +15,7 @@ setup(
     install_requires=[
         'numpy',
         'opencv-python',
-        'matplotlib',
-        'cython'
+        'spams',
+        'matplotlib'
     ]
 )
