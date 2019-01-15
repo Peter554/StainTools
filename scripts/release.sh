@@ -41,7 +41,7 @@ bumpversion $releasetype;
 # Make the dist
 {
     echo "";
-    python setup.py sdist;
+    pipenv run python setup.py sdist;
 } || { 
     echo "";
     echo "Error with setup.py";
