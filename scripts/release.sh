@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO Needs updating
-
 while true; do
     echo "";
     read -p "This script will add modified files and commit them - is that Okay (y/n)? " go;
