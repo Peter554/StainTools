@@ -41,3 +41,15 @@ class StainNormalizer(object):
         source_concentrations *= (self.maxC_target / maxC_source)
         tmp = 255 * np.exp(-1 * np.dot(source_concentrations, self.stain_matrix_target))
         return tmp.reshape(I.shape).astype(np.uint8)
+
+    def fit_transform(self, target):
+        """Fit and transform a target image
+
+        :param target: Image RGB uint8.
+        :return:
+        """
+        self.stain_matrix_target = self.extractor.get_stain_matrix(target)
+        self.target_concentrations = get_concentrations(target, self.stain_matrix_target)
+        self.stain_matrix_target_RGB = convert_OD_to_RGB(self.stain_matrix_target)  # useful to visualize.
+        tmp = 255 * np.exp(-1 * np.dot(self.target_concentrations, self.stain_matrix_target))
+        return tmp.reshape(target.shape).astype(np.uint8)
