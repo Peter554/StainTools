@@ -16,16 +16,15 @@ i5 = staintools.read_image("./data/i5.png")
 # Plot
 images = [i1, i2, i3, i4, i5]
 titles = ["Target"] + ["Original"] * 4
-staintools.plot_image_list(images, width=5, title_list=titles, \
+staintools.plot_image_list(images, width=5, title_list=titles,
                            save_name=RESULTS_DIR + 'original-images.png', show=0)
 
 # =========================
-# Brightness standarization
+# Brightness standardization
 # (Can skip but can help with tissue mask detection)
 # =========================
 
 if STANDARDIZE_BRIGHTNESS:
-
     # Standardize brightness
     i1 = staintools.LuminosityStandardizer.standardize(i1)
     i2 = staintools.LuminosityStandardizer.standardize(i2)
@@ -36,8 +35,8 @@ if STANDARDIZE_BRIGHTNESS:
     # Plot
     images = [i1, i2, i3, i4, i5]
     titles = ["Target standardized"] + ["Original standardized"] * 4
-    staintools.plot_image_list(images, width=5, title_list=titles, \
-                                save_name=RESULTS_DIR + 'original-images-standardized.png', show=0)
+    staintools.plot_image_list(images, width=5, title_list=titles,
+                               save_name=RESULTS_DIR + 'original-images-standardized.png', show=0)
 
 # ===================
 # Stain normalization
@@ -54,8 +53,8 @@ i5_normalized = normalizer.transform(i5)
 # Plot
 images = [i1, i2_normalized, i3_normalized, i4_normalized, i5_normalized]
 titles = ["Target"] + ["Stain normalized"] * 4
-staintools.plot_image_list(images, width=5, title_list=titles, \
-                            save_name=RESULTS_DIR + 'stain-normalized-images.png', show=0)
+staintools.plot_image_list(images, width=5, title_list=titles,
+                           save_name=RESULTS_DIR + 'stain-normalized-images.png', show=0)
 
 # ==================
 # Stain augmentation
@@ -71,5 +70,5 @@ for _ in range(10):
 
 # Plot
 titles = ["Augmented"] * 10
-staintools.plot_image_list(augmented_images, width=5, title_list=titles, \
-                            save_name=RESULTS_DIR + 'stain-augmented-images.png', show=0)
+staintools.plot_image_list(augmented_images, width=5, title_list=titles,
+                           save_name=RESULTS_DIR + 'stain-augmented-images.png', show=0)
