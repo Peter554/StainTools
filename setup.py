@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='staintools',
-    version='2.1.1',
+    version='2.1.2',
     description='A package for tissue image stain normalization, augmentation and more.',
     author='Peter Byfield',
     author_email='byfield554@gmail.com',
