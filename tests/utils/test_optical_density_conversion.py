@@ -10,7 +10,7 @@ from staintools.utils.optical_density_conversion import convert_RGB_to_OD, conve
 
 class TestOpticalDensityConversion(unittest.TestCase):
     def test_convert_RGB_to_OD(self):
-        rgb = np.random.randint(0, 256, [3, 2, 3])
+        rgb = np.random.randint(0, 256, [7, 2, 3])
 
         get = convert_RGB_to_OD(rgb)
 
@@ -21,7 +21,7 @@ class TestOpticalDensityConversion(unittest.TestCase):
                     self.assertAlmostEqual(expect, get[i, j, k])
 
     def test_convert_OD_to_RGB(self):
-        od = np.random.uniform(0, 1, [3, 2, 3])
+        od = np.random.uniform(0, 1, [4, 5, 3])
 
         get = convert_OD_to_RGB(od)
 
