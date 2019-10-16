@@ -1,7 +1,7 @@
 import cv2 as cv
 
 from staintools.tissue_masks.abc_tissue_locator import ABCTissueLocator
-from staintools.miscellaneous.exceptions import TissueMaskException
+from staintools.utils.exceptions import TissueMaskException
 from staintools.preprocessing.input_validation import is_uint8_image
 
 

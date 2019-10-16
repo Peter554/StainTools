@@ -4,7 +4,7 @@ import copy
 from staintools.stain_extraction.macenko_stain_extractor import MacenkoStainExtractor
 from staintools.stain_extraction.vahadane_stain_extractor import VahadaneStainExtractor
 from staintools.tissue_masks.luminosity_threshold_tissue_locator import LuminosityThresholdTissueLocator
-from staintools.miscellaneous.get_concentrations import get_concentrations
+from staintools.utils.get_concentrations import get_concentrations
 
 
 class StainAugmentor(object):

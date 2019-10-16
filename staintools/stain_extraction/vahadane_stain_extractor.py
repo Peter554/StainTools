@@ -1,8 +1,8 @@
 import spams
 
 from staintools.stain_extraction.abc_stain_extractor import ABCStainExtractor
-from staintools.miscellaneous.miscellaneous_functions import normalize_matrix_rows
-from staintools.miscellaneous.optical_density_conversion import convert_RGB_to_OD
+from staintools.utils.miscellaneous_functions import normalize_matrix_rows
+from staintools.utils.optical_density_conversion import convert_RGB_to_OD
 from staintools.tissue_masks.luminosity_threshold_tissue_locator import LuminosityThresholdTissueLocator
 from staintools.preprocessing.input_validation import is_uint8_image
 

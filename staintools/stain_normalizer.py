@@ -2,8 +2,8 @@ import numpy as np
 
 from staintools.stain_extraction.macenko_stain_extractor import MacenkoStainExtractor
 from staintools.stain_extraction.vahadane_stain_extractor import VahadaneStainExtractor
-from staintools.miscellaneous.optical_density_conversion import convert_OD_to_RGB
-from staintools.miscellaneous.get_concentrations import get_concentrations
+from staintools.utils.optical_density_conversion import convert_OD_to_RGB
+from staintools.utils.get_concentrations import get_concentrations
 
 
 class StainNormalizer(object):
